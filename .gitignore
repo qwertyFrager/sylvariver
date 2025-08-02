@@ -2,8 +2,8 @@
 node_modules/
 
 # build output
-dist/
-public/output.css
+# dist/
+# public/output.css
 
 # system files
 .DS_Store
