@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sylva River - Загородные домики в стиле Шале</title>
+    <link rel="stylesheet" href="./dist/output.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+    <style>
+        #overlay {
+        --r: 160px;
+        mask-image: radial-gradient(circle var(--r) at var(--x, 50%) var(--y, 50%),
+                                    transparent 0,
+                                    transparent calc(var(--r) - 20px),
+                                    black var(--r));
+        -webkit-mask-image: radial-gradient(circle var(--r) at var(--x, 50%) var(--y, 50%),
+                                            transparent 0,
+                                            transparent calc(var(--r) - 20px),
+                                            black var(--r));
+        }
+
+        #menuToggle.active .line-1 { transform: translateY(9px) rotate(45deg); }
+        #menuToggle.active .line-2 { opacity: 0; }
+        #menuToggle.active .line-3 { transform: translateY(-9px) rotate(-45deg); }
+
+        /* ПК-кнопка активна — превращаемся в крест */
+        #menuToggleDesktop.active .d-line-1 { transform: translateY(9px) rotate(45deg); }
+        #menuToggleDesktop.active .d-line-2 { opacity: 0; }
+        #menuToggleDesktop.active .d-line-3 { transform: translateY(-9px) rotate(-45deg); }
+    </style>
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+</head>
+
+<body class="bg-[#f7fff5] font-sans">
+    <!-- Overlay -->
+    <div id="menu-overlay"
+        class="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-300">
+    </div>
+
+    <!-- Меню -->
+    <aside id="site-drawer"
+        class="lg:hidden fixed top-0 left-0 z-[60] h-screen w-72 -translate-x-full transition-transform
+                bg-[#f7fff5] backdrop-blur border-r border-white/20 p-6">
+    <div class="flex items-center justify-between mb-6">
+        <span class="text-xl font-bold">Меню</span>
+
+        <!-- Кнопка закрытия показываеттся только на мобилке -->
+        <button class="cursor-pointer lg:hidden rounded p-2"
+                aria-controls="site-drawer"
+                data-drawer-hide="site-drawer">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+            viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+        </button>
+    </div>
+
+    <!-- Навигация -->
+        <nav class="space-y-2">
+            <a href="#hero" class="block px-3 py-2 rounded hover:bg-gray-100" aria-controls="site-drawer"
+                data-drawer-hide="site-drawer">Главная</a>
+            <a href="#events" class="block px-3 py-2 rounded hover:bg-gray-100" aria-controls="site-drawer"
+                data-drawer-hide="site-drawer">Мероприятия</a>                    
+            <a href="#houses" class="block px-3 py-2 rounded hover:bg-gray-100" aria-controls="site-drawer"
+                data-drawer-hide="site-drawer">Наши дома</a>
+            <a href="#services" class="block px-3 py-2 rounded hover:bg-gray-100" aria-controls="site-drawer"
+                data-drawer-hide="site-drawer">Услуги</a> 
+            <a href="#booking" class="block px-3 py-2 rounded hover:bg-gray-100" aria-controls="site-drawer"
+                data-drawer-hide="site-drawer">Бронирование</a> 
+            <a href="#faq" class="block px-3 py-2 rounded hover:bg-gray-100" aria-controls="site-drawer"
+                data-drawer-hide="site-drawer">Частые вопросы</a>
+            <a href="#maps" class="block px-3 py-2 rounded hover:bg-gray-100" aria-controls="site-drawer"
+                data-drawer-hide="site-drawer">Где находимся</a>            
+        </nav>
+    </aside>
+
+        <!-- RIGHT Drawer / ПК меню -->
+    <aside id="site-drawer-desktop"
+        class="hidden lg:block fixed top-0 left-0 z-[60] h-screen w-[360px] max-w-[85vw]
+                -translate-x-full transition-transform duration-300 ease-out
+                bg-[#f7fff5] backdrop-blur border-l border-white/20 p-6">
+    <div class="flex items-center justify-between mb-6">
+        <span class="text-xl font-bold">Меню</span>
+        <button class="cursor-pointer rounded p-2" aria-controls="site-drawer-desktop" data-drawer-hide="site-drawer-desktop">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M6 18L18 6M6 6l12 12"/>
+            </svg>
+        </button>
+    </div>
+
+    <nav class="space-y-2">
+            <a href="#hero" class="block px-3 py-2 rounded hover:bg-[#78DD7E] hover:text-white transition duration-100" aria-controls="site-drawer-desktop" data-drawer-hide="site-drawer-desktop">Главная</a>
+            <a href="#events" class="block px-3 py-2 rounded hover:bg-[#78DD7E] hover:text-white transition duration-100" aria-controls="site-drawer-desktop" data-drawer-hide="site-drawer-desktop">Мероприятия</a>                    
+            <a href="#houses" class="block px-3 py-2 rounded hover:bg-[#78DD7E] hover:text-white transition duration-100" aria-controls="site-drawer-desktop" data-drawer-hide="site-drawer-desktop">Наши дома</a>
+            <a href="#services" class="block px-3 py-2 rounded hover:bg-[#78DD7E] hover:text-white transition duration-100" aria-controls="site-drawer-desktop" data-drawer-hide="site-drawer-desktop">Услуги</a> 
+            <a href="#booking" class="block px-3 py-2 rounded hover:bg-[#78DD7E] hover:text-white transition duration-100" aria-controls="site-drawer-desktop" data-drawer-hide="site-drawer-desktop">Бронирование</a> 
+            <a href="#faq" class="block px-3 py-2 rounded hover:bg-[#78DD7E] hover:text-white transition duration-100" aria-controls="site-drawer-desktop" data-drawer-hide="site-drawer-desktop">Частые вопросы</a>
+            <a href="#maps" class="block px-3 py-2 rounded hover:bg-[#78DD7E] hover:text-white transition duration-100" aria-controls="site-drawer-desktop" data-drawer-hide="site-drawer-desktop">Где находимся</a>   
+    </nav>
+    </aside>
+
+    <!-- Hero Section -->
+    <section id="hero" class="relative w-full h-screen bg-cover bg-center bg-[url('../assets/images/bg.jpg')]">
+
+        <div id="overlay"
+            class="pointer-events-none absolute inset-0 z-[5] bg-black/40 hidden lg:block">
+        </div>        
+        
+        <!-- Header -->
+        <div class="relative z-20 grid lg:grid-cols-3 items-end 
+            px-4 sm:px-6 lg:px-[120px] pt-[20px] 
+            bg-gradient-to-b from-black to-black/0">
+            <!-- Контакты (слева) -->
+            <div class="hidden lg:flex items-center gap-1 h-full">
+                <!-- Кнопка открытия ПК-меню -->
+                <button id="menuToggleDesktop"
+                        class="cursor-pointer lg:inline-flex p-4 text-white"
+                        type="button"
+                        aria-controls="site-drawer-desktop"
+                        aria-expanded="false"
+                        data-drawer-target="site-drawer-desktop"
+                        data-drawer-toggle="site-drawer-desktop"
+                        data-drawer-backdrop="true"
+                        data-drawer-placement="left">
+                    <span class="sr-only">Открыть меню</span>
+                    <div class="relative w-8 h-5">
+                    <span class="d-line-1 absolute left-0 top-0 h-[2px] w-8 bg-white transition-transform duration-300"></span>
+                    <span class="d-line-2 absolute left-0 top-1/2 -translate-y-1/2 h-[2px] w-8 bg-white transition-opacity duration-300"></span>
+                    <span class="d-line-3 absolute left-0 bottom-0 h-[2px] w-8 bg-white transition-transform duration-300"></span>
+                    </div>
+                </button>
+            </div>
+
+            <!-- Логотип (по центру) -->
+            <div class="flex justify-end lg:justify-center">
+                <img src="assets/images/img_vector.svg" class="w-[178px] h-[74px]" alt="Sylva River Logo" />
+            </div>
+
+            <!-- Телефон (справа) -->
+            <div class="hidden lg:flex justify-end items-center gap-4 h-full">
+                <div class="flex items-center gap-2">
+                <img src="assets/images/img_free_icon_telephone_159832.svg" class="w-[22px] h-[22px]" alt="phone" />
+                <span class="text-[24px] font-medium text-white font-montserrat leading-[31px]">+7 950 459 97-78</span>
+                </div>                
+            </div>
+
+            <!-- Мобильная кнопка (на всю ширину, поверх остальных) -->
+            <button id="menuToggle"
+                    class="cursor-pointer lg:hidden absolute top-[20px] left-4 p-4 text-white group"
+                    type="button"
+                    aria-controls="site-drawer"
+                    aria-expanded="false"
+                    data-drawer-target="site-drawer"
+                    data-drawer-toggle="site-drawer"
+                    data-drawer-backdrop="true"
+                    data-drawer-placement="left">
+            <span class="sr-only">Открыть меню</span>
+            <div class="relative w-8 h-5">
+                <span class="line-1 absolute left-0 top-0 h-[2px] w-8 bg-white transition-transform duration-300"></span>
+                <span class="line-2 absolute left-0 top-1/2 -translate-y-1/2 h-[2px] w-8 bg-white transition-opacity duration-300"></span>
+                <span class="line-3 absolute left-0 bottom-0 h-[2px] w-8 bg-white transition-transform duration-300"></span>
+            </div>
+            </button>
+        </div>
+        
+        <!-- Hero Content -->
+        <div class="relative z-20 flex flex-col items-center justify-center h-full px-4 sm:px-6 lg:px-[176px] text-center">
+            <div class="max-w-4xl">
+                <h1 class="text-[24px] sm:text-[28px] md:text-[32px] lg:text-[36px] font-black text-white font-montserrat leading-[30px] sm:leading-[35px] md:leading-[40px] lg:leading-[45px] mb-4">
+                    Загородные домики в стиле Шале. Насладитесь уютом и покоем на высоком берегу реки Сылва.
+                </h1>
+                <p class="text-[14px] sm:text-[15px] md:text-[16px] lg:text-[17px] font-medium text-white font-montserrat leading-[18px] sm:leading-[20px] md:leading-[22px] mb-8 lg:mb-[104px]">
+                    Организуйте мероприятие на природе с прекрасным речным пейзажем.
+                </p>
+                <button class="cursor-pointer relative bg-cover bg-center px-8 py-4 rounded-[14px] text-white font-montserrat font-medium text-[12px] sm:text-[13px] md:text-[14px] lg:text-[15px] leading-[19px] tracking-[1px] uppercase transition-all duration-300 hover:scale-105 bg-[url('../assets/images/img_rectangle_2.png')]" >
+                    <a href="#booking">забронировать</a>
+                </button>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Event Organization Section -->
+    <section id="events" class="w-full px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
+        <h2 class="text-[24px] sm:text-[26px] md:text-[28px] font-extrabold text-black font-montserrat leading-[30px] sm:leading-[33px] md:leading-[35px] text-center mb-12 lg:mb-16">
+            Организация мероприятий
+        </h2>
+        
+        <div class="max-w-7xl mx-auto flex flex-col lg:flex-row gap-8 lg:gap-16 items-center">
+            <!-- Image Gallery -->
+            <div class="w-full lg:w-[56%] flex flex-col gap-4">
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <img src="assets/images/img_tipichnoe_chalet.png" class="w-full sm:w-[52%] h-[200px] object-cover rounded-lg" alt="Chalet" />
+                    <div class="flex flex-col gap-2 w-full sm:w-[24%]">
+                        <img src="assets/images/img_1673053858_pro.png" class="w-full h-[94px] object-cover rounded-lg" alt="Interior" />
+                        <img src="assets/images/img_mask.png" class="w-full h-[94px] object-cover rounded-lg" alt="Interior" />
+                    </div>
+                    <img src="assets/images/img_1618647870_29_p.png" class="w-full sm:w-[24%] h-[200px] object-cover rounded-lg" alt="Exterior" />
+                </div>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <div class="flex flex-col gap-2 w-full sm:w-[24%]">
+                        <img src="assets/images/img_1555763_1.png" class="w-full h-[94px] object-cover rounded-lg" alt="Detail" />
+                        <img src="assets/images/img_mask_94x142.png" class="w-full h-[94px] object-cover rounded-lg" alt="Detail" />
+                    </div>
+                    <img src="assets/images/img_mask_200x142.png" class="w-full sm:w-[24%] h-[200px] object-cover rounded-lg" alt="View" />
+                    <img src="assets/images/img_tild3961_3663_4.png" class="w-full sm:w-[50%] h-[200px] object-cover rounded-lg" alt="Event" />
+                </div>
+            </div>
+            
+            <!-- Content -->
+            <div class="w-full lg:w-[34%] flex flex-col gap-3">
+                <h3 class="text-[20px] sm:text-[21px] md:text-[23px] font-extrabold text-black font-montserrat leading-[25px] sm:leading-[27px] md:leading-[29px]">
+                    SYLVA RIVER
+                </h3>
+                <p class="text-[13px] sm:text-[14px] md:text-[15px] font-medium text-black font-montserrat leading-[16px] sm:leading-[17px] md:leading-[19px] bg-gradient-to-r from-black to-[#94da89] bg-clip-text text-transparent">
+                    Загородный эко-парк SYLVA RIVER послужит идеальным местом для организации различных мероприятий. Неповторимый стиль площадки позволяет воплотить самые креативные мечты и идеи. У нас незаурядный формат, авторская мебель, экологический стиль интерьера и многое другое, что делает это место уникальным.
+                </p>
+                <div class="w-[48px] h-[1px] bg-[#93d989] my-2"></div>
+                <p class="text-[13px] sm:text-[14px] md:text-[15px] font-medium text-black font-montserrat leading-[16px] sm:leading-[17px] md:leading-[19px] bg-gradient-to-r from-black to-[#94da89] bg-clip-text text-transparent">
+                    Наша визитная карточка – это, несомненно, свадьба. Неоспоримое преимущество организации такого важного мероприятия в SYLVA RIVER – возможность отступления от классических канонов. Здесь вы можете провести свое свадебное торжество в двухэтажном Шале площадью 270 кв.метров, с панормаными окнами и открытой терассой, на которой сквозь красивый еловый лес можно полюбоваться разливом реки Сылва
+                </p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Houses Section -->
+    <section id="houses" class="w-full px-4 sm:px-6 lg:px-8 py-16">
+        <div class="text-center mb-12">
+            <p class="text-[15px] sm:text-[16px] md:text-[17px] font-semibold text-[#93d989] font-montserrat leading-[20px] sm:leading-[21px] md:leading-[22px] mb-2">
+                SYLVA RIVER
+            </p>
+            <h2 class="text-[24px] sm:text-[26px] md:text-[28px] font-extrabold text-black font-montserrat leading-[32px] sm:leading-[35px] md:leading-[40px]">
+                Наши дома
+            </h2>
+        </div>
+        
+        <!-- House Type Tabs -->
+        <div class="flex flex-row gap-2 sm:gap-7 justify-center mb-12 max-w-4xl mx-auto">
+            <button onclick="selectHouseType(0)" id="house-tab-0" class="hover:cursor-pointer house-tab px-2 sm:px-6 py-4 rounded bg-[#93d989] text-white font-montserrat font-extrabold text-[10px] sm:text-[11px] leading-[13px] sm:leading-[14px] uppercase shadow-md transition-all duration-300">
+                ДОМИК ИЗ БРУСА
+            </button>
+            <button onclick="selectHouseType(1)" id="house-tab-1" class="hover:cursor-pointer house-tab px-2 sm:px-6 py-4 rounded bg-[#93d989] text-white font-montserrat font-extrabold text-[10px] sm:text-[11px] leading-[13px] sm:leading-[14px] uppercase shadow-md transition-all duration-300">
+                ШАЛЕ
+            </button>
+            <button onclick="selectHouseType(2)" id="house-tab-2" class="hover:cursor-pointer house-tab px-2 sm:px-6 py-4 rounded bg-[#93d989] text-white font-montserrat font-extrabold text-[10px] sm:text-[11px] leading-[13px] sm:leading-[14px] uppercase shadow-md transition-all duration-300">
+                БОЛЬШОЙ ДОМ
+            </button>
+            <button onclick="selectHouseType(3)" id="house-tab-3" class="hover:cursor-pointer house-tab px-2 sm:px-6 py-4 rounded bg-[#93d989] text-white font-montserrat font-extrabold text-[10px] sm:text-[11px] leading-[13px] sm:leading-[14px] uppercase shadow-md transition-all duration-300">
+                ДОМИК В ЛЕСУ
+            </button>
+        </div>
+        
+        <!-- House Content -->
+        <!-- SLIDER -->
+            <div class="max-w-7xl mx-auto">
+  <div class="relative">
+
+    <!-- СЛАЙДЕР -->
+    <div id="houses-swiper" class="swiper">
+      <div class="swiper-wrapper">
+
+        <!-- Слайд 0 — Домик из бруса -->
+        <div class="swiper-slide">
+          <div class="flex flex-col lg:flex-row gap-8 lg:gap-16 items-center">
+            <!-- Левая часть (картинки) -->
+            <div class="w-full lg:w-[56%] relative">
+              <div class="relative w-full h-[300px] sm:h-[350px] md:h-[380px]">
+                <div class="absolute top-8 right-0 w-[86%] h-[308px] bg-[#94d989] rounded-lg"></div>
+                <img src="assets/images/img_tree_h03_1.png" class="absolute top-0 left-0 w-[38%] h-[374px] object-cover z-10" alt="Tree" />
+                <img src="assets/images/img_46_1_transformed.png" class="absolute bottom-4 left-[20%] w-[60%] h-[308px] object-cover z-20 rounded-lg" alt="House" />
+              </div>
+            </div>
+            <!-- Правая часть (карточка) -->
+            <div class="w-full lg:w-[36%] bg-gradient-to-br from-[#b7f5ae] to-[#caffc2] rounded-lg p-4 sm:p-6 shadow-lg">
+              <h3 class="text-[20px] sm:text-[22px] md:text-[25px] font-extrabold text-black font-montserrat leading-[25px] sm:leading-[28px] md:leading-[31px] mb-3 ml-3">
+                ДОМИК ИЗ БРУСА
+              </h3>
+              <p class="text-[11px] sm:text-[12px] font-normal text-black font-montserrat leading-[13px] sm:leading-[15px] mb-8 w-[86%]">
+                Уютный вариант для пары с ребёнком до 5 лет: тепло, тишина и вид на реку.
+              </p>
+              <div class="flex flex-wrap gap-3 mb-4">
+                <div class="flex items-center gap-3">
+                  <div class="w-[38px] h-[38px] bg-[#e0eeff] rounded-full flex items-center justify-center">
+                    <img src="assets/images/img_group_8.svg" class="w-[18px] h-[18px]" alt="people" />
+                  </div>
+                  <div>
+                    <p class="text-[16px] sm:text-[19px] font-bold text-[#333333] font-urbanist leading-[20px] sm:leading-[23px]">6</p>
+                    <p class="text-[10px] sm:text-[11px] font-normal text-[#3333337f] font-dm-sans leading-[13px] sm:leading-[15px]">Человек</p>
+                  </div>
+                </div>
+                <div class="flex items-center gap-3">
+                  <div class="w-[38px] h-[38px] bg-[#e0eeff] rounded-full flex items-center justify-center">
+                    <img src="assets/images/img_group_7.svg" class="w-[18px] h-[18px]" alt="area" />
+                  </div>
+                  <div>
+                    <p class="text-[16px] sm:text-[19px] font-bold text-[#333333] font-urbanist leading-[20px] sm:leading-[23px]">20 м²</p>
+                    <p class="text-[10px] sm:text-[11px] font-normal text-[#3333337f] font-karla leading-[12px] sm:leading-[14px]">Площадь</p>
+                  </div>
+                </div>
+              </div>
+              <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 w-[90%]">
+                <button class="cursor-pointer bg-cover bg-center px-6 py-3 rounded-[10px] text-white font-montserrat font-medium text-[8px] sm:text-[9px] leading-[10px] sm:leading-[12px] uppercase transition-all duration-300 hover:scale-105" style="background-image: url('assets/images/img_rectangle_2.png')">
+                  <a href="#booking">забронировать</a>
+                </button>
+                <div class="flex items-end gap-1">
+                  <span class="text-[20px] sm:text-[25px] font-bold text-[#333333] font-montserrat leading-[26px] sm:leading-[32px]">8000₽</span>
+                  <span class="text-[10px] sm:text-[12px] font-normal text-[#3333337f] font-montserrat leading-[13px] sm:leading-[16px] mb-1">/сутки</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Слайд 1 — Шале (пример) -->
+        <div class="swiper-slide">
+          <div class="flex flex-col lg:flex-row gap-8 lg:gap-16 items-center">
+            <div class="w-full lg:w-[56%] relative">
+              <div class="relative w-full h-[300px] sm:h-[350px] md:h-[380px]">
+                <div class="absolute top-8 right-0 w-[86%] h-[308px] bg-[#bcd7ff] rounded-lg"></div>
+                <img src="assets/images/img_tree_h03_1.png" class="absolute top-0 left-0 w-[38%] h-[374px] object-cover z-10" alt="Tree" />
+                <img src="assets/images/img_46_1_transformed.png" class="absolute bottom-4 left-[20%] w-[60%] h-[308px] object-cover z-20 rounded-lg" alt="Chalet" />
+              </div>
+            </div>
+            <div class="w-full lg:w-[36%] bg-gradient-to-br from-[#e0f0ff] to-[#f0f7ff] rounded-lg p-4 sm:p-6 shadow-lg">
+              <h3 class="text-[20px] sm:text-[22px] md:text-[25px] font-extrabold text-black font-montserrat leading-[25px] sm:leading-[28px] md:leading-[31px] mb-3 ml-3">
+                ШАЛЕ
+              </h3>
+              <p class="text-[11px] sm:text-[12px] font-normal text-black font-montserrat leading-[13px] sm:leading-[15px] mb-8 w-[86%]">
+                Простор, большие окна и дерево — идеально для компании друзей.
+              </p>
+              <!-- ...удобства и цена по образцу... -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Слайд 2 — Шале (пример) -->
+        <div class="swiper-slide">
+          <div class="flex flex-col lg:flex-row gap-8 lg:gap-16 items-center">
+            <div class="w-full lg:w-[56%] relative">
+              <div class="relative w-full h-[300px] sm:h-[350px] md:h-[380px]">
+                <div class="absolute top-8 right-0 w-[86%] h-[308px] bg-[#bcd7ff] rounded-lg"></div>
+                <img src="assets/images/img_tree_h03_1.png" class="absolute top-0 left-0 w-[38%] h-[374px] object-cover z-10" alt="Tree" />
+                <img src="assets/images/img_46_1_transformed.png" class="absolute bottom-4 left-[20%] w-[60%] h-[308px] object-cover z-20 rounded-lg" alt="Chalet" />
+              </div>
+            </div>
+            <div class="w-full lg:w-[36%] bg-gradient-to-br from-[#e0f0ff] to-[#f0f7ff] rounded-lg p-4 sm:p-6 shadow-lg">
+              <h3 class="text-[20px] sm:text-[22px] md:text-[25px] font-extrabold text-black font-montserrat leading-[25px] sm:leading-[28px] md:leading-[31px] mb-3 ml-3">
+                ШАЛЕ
+              </h3>
+              <p class="text-[11px] sm:text-[12px] font-normal text-black font-montserrat leading-[13px] sm:leading-[15px] mb-8 w-[86%]">
+                Простор, большие окна и дерево — идеально для компании друзей.
+              </p>
+              <!-- ...удобства и цена по образцу... -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Слайд 3 — Шале (пример) -->
+        <div class="swiper-slide">
+          <div class="flex flex-col lg:flex-row gap-8 lg:gap-16 items-center">
+            <div class="w-full lg:w-[56%] relative">
+              <div class="relative w-full h-[300px] sm:h-[350px] md:h-[380px]">
+                <div class="absolute top-8 right-0 w-[86%] h-[308px] bg-[#bcd7ff] rounded-lg"></div>
+                <img src="assets/images/img_tree_h03_1.png" class="absolute top-0 left-0 w-[38%] h-[374px] object-cover z-10" alt="Tree" />
+                <img src="assets/images/img_46_1_transformed.png" class="absolute bottom-4 left-[20%] w-[60%] h-[308px] object-cover z-20 rounded-lg" alt="Chalet" />
+              </div>
+            </div>
+            <div class="w-full lg:w-[36%] bg-gradient-to-br from-[#e0f0ff] to-[#f0f7ff] rounded-lg p-4 sm:p-6 shadow-lg">
+              <h3 class="text-[20px] sm:text-[22px] md:text-[25px] font-extrabold text-black font-montserrat leading-[25px] sm:leading-[28px] md:leading-[31px] mb-3 ml-3">
+                ШАЛЕ
+              </h3>
+              <p class="text-[11px] sm:text-[12px] font-normal text-black font-montserrat leading-[13px] sm:leading-[15px] mb-8 w-[86%]">
+                Простор, большие окна и дерево — идеально для компании друзей.
+              </p>
+              <!-- ...удобства и цена по образцу... -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Пагинация (точки) -->
+      <div class="block lg:hidden swiper-pagination"></div>
+    </div>
+
+    <!-- Внешние стрелки (можно использовать ваши иконки) -->
+    <div class="lg:flex hidden mt-4 inset-x-0 justify-center gap-4">
+      <button id="prev-house" class="cursor-pointer w-[38px] h-[38px] rounded-full bg-gray-100 flex items-center justify-center hover:bg-gray-300 transition">
+        <img src="assets/images/img_left.svg" class="w-[20px] h-[20px]" alt="prev" />
+      </button>
+      <button id="next-house" class="cursor-pointer w-[38px] h-[38px] rounded-full bg-gray-100 flex items-center justify-center hover:bg-gray-300 transition">
+        <img src="assets/images/img_left_white_a700.svg" class="w-[20px] h-[20px]" alt="next" />
+      </button>
+    </div>
+  </div>
+</div>
+    </section>
+    
+    <!-- Additional Services Section -->
+    <section id="services" class="w-full px-4 sm:px-6 lg:px-8 py-16">
+        <h2 class="text-[24px] sm:text-[26px] md:text-[28px] font-extrabold text-black font-montserrat leading-[32px] sm:leading-[35px] md:leading-[39px] text-center mb-16">
+            Дополнительные услуги
+        </h2>
+        
+        <div class="max-w-7xl mx-auto relative">
+            
+            
+            <!-- Services Grid -->
+            <div class="flex flex-col md:flex-row gap-8 lg:gap-24 px-0 lg:px-16">
+                <!-- Service 1 -->
+                <div class="flex flex-col items-start w-full md:w-1/3">
+                    <img src="assets/images/service1.jpg" class="w-full h-[294px] object-cover rounded-lg mb-3" alt="Boat rental" />
+                    <h3 class="text-[18px] sm:text-[20px] md:text-[22px] font-semibold text-black font-montserrat leading-[23px] sm:leading-[25px] md:leading-[28px] mb-3">
+                        Аренда катера
+                    </h3>
+                    <p class="text-[10px] sm:text-[11px] font-medium text-[#515151] font-montserrat leading-[12px] sm:leading-[14px]">
+                        Вы можете самостоятельно выбрать яхту, либо написать параметры яхты, которая вам необходима и наш менеджер подберет идеальный для вас вариант.
+                    </p>
+                </div>
+                
+                <!-- Service 2 -->
+                <div class="flex flex-col items-start w-full md:w-1/3">
+                    <img src="assets/images/img_8eb351defa0c75b_294x246.png" class="w-full h-[294px] object-cover rounded-lg mb-3" alt="Campfire" />
+                    <h3 class="text-[18px] sm:text-[19px] md:text-[21px] font-semibold text-black font-montserrat leading-[23px] sm:leading-[25px] md:leading-[27px] mb-3 text-center">
+                        Посиделки у костра
+                    </h3>
+                    <p class="text-[10px] sm:text-[11px] font-medium text-[#515151] font-montserrat leading-[12px] sm:leading-[14px] w-[78%]">
+                        На огонь и так можно смотреть бесконечно. А если добавить к зрелищам хлеб и приятную компанию, будет совсем отлично.
+                    </p>
+                </div>
+                <!-- Service 3 -->
+     <div class="flex flex-col items-start w-full md:w-1/3">
+                    <img src="assets/images/img_8eb351defa0c75b_294x244.png" class="w-full h-[294px] object-cover rounded-lg mb-3" alt="Campfire" />
+                    <h3 class="text-[18px] sm:text-[19px] md:text-[21px] font-semibold text-black font-montserrat leading-[23px] sm:leading-[25px] md:leading-[27px] mb-3 text-center">
+                        Посиделки у костра
+                    </h3>
+                    <p class="text-[10px] sm:text-[11px] font-medium text-[#515151] font-montserrat leading-[12px] sm:leading-[14px] w-[78%]">
+                        На огонь и так можно смотреть бесконечно. А если добавить к зрелищам хлеб и приятную компанию, будет совсем отлично.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Event Organization Section -->
+    <section id="booking" class="w-full px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
+        <h2 class="text-[24px] sm:text-[26px] md:text-[28px] font-extrabold text-black font-montserrat leading-[30px] sm:leading-[33px] md:leading-[35px] text-center mb-12 lg:mb-16">
+            Бронирование
+        </h2>
+    </section>
+    
+    <!-- FAQ Section -->
+    <section id="faq" class="w-full px-4 sm:px-6 lg:px-8 py-16">
+        <div class="max-w-5xl mx-auto">
+            <div class="flex flex-col lg:flex-row gap-8 lg:gap-16 items-between">
+                <div class="w-full">
+                    <h2 class="text-[24px] sm:text-[26px] md:text-[28px] font-extrabold text-black font-montserrat leading-[32px] sm:leading-[35px] md:leading-[39px] text-center mb-16">
+                        Частые вопросы
+                    </h2>
+                    
+                    <div class="space-y-8">
+                        <div class="faq-item border-b border-gray-200 pb-4">
+                            <button onclick="toggleFAQ(0)"
+                                    class="faq-btn cursor-pointer w-full text-left flex justify-between items-center">
+                                <span class="text-[22px] sm:text-[24px] md:text-[27px] font-medium text-black font-montserrat leading-[28px] sm:leading-[30px] md:leading-[34px]">
+                                Что входит в стоимость аренды?
+                                </span>
+                                <span class="faq-icon text-[#78dd7e] text-[60px] sm:text-[65px] md:text-[71px] font-medium leading-[75px] sm:text-[80px] md:leading-[88px] transition-transform duration-300">
+                                +
+                                </span>
+                            </button>
+
+                            <!-- ПАНЕЛЬ с анимируемой высотой -->
+                            <div class="faq-panel grid grid-rows-[0fr] transition-[grid-template-rows] duration-500 ease-out mt-4">
+                                <div class="overflow-hidden">
+                                <!-- Контент с fade/slide -->
+                                <div class="faq-content opacity-0 translate-y-1 transition-all duration-500 ease-out">
+                                    <p class="text-gray-600">
+                                    В стоимость аренды входит проживание, базовые удобства, парковка и доступ к общественным зонам.
+                                    </p>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="faq-item border-b border-gray-200 pb-4">
+                            <button onclick="toggleFAQ(1)"
+                                    class="faq-btn cursor-pointer w-full text-left flex justify-between items-center">
+                                <span class="text-[22px] sm:text-[24px] md:text-[27px] font-medium text-black font-montserrat leading-[28px] sm:leading-[30px] md:leading-[34px]">
+                                Дрова включены в аренду?
+                                </span>
+                                <span class="faq-icon text-[#78dd7e] text-[60px] sm:text-[65px] md:text-[71px] font-medium leading-[75px] sm:text-[80px] md:leading-[88px] transition-transform duration-300">
+                                +
+                                </span>
+                            </button>
+
+                            <!-- ПАНЕЛЬ с анимируемой высотой -->
+                            <div class="faq-panel grid grid-rows-[0fr] transition-[grid-template-rows] duration-500 ease-out mt-4">
+                                <div class="overflow-hidden">
+                                <!-- Контент с fade/slide -->
+                                <div class="faq-content opacity-0 translate-y-1 transition-all duration-500 ease-out">
+                                    <p class="text-gray-600">
+                                    Да, дрова для камина и костра включены в стоимость аренды.
+                                    </p>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="faq-item border-b border-gray-200 pb-4">
+                            <button onclick="toggleFAQ(2)"
+                                    class="faq-btn cursor-pointer w-full text-left flex justify-between items-center">
+                                <span class="text-[22px] sm:text-[24px] md:text-[27px] font-medium text-black font-montserrat leading-[28px] sm:leading-[30px] md:leading-[34px]">
+                                Можно приобрести подарочный сертификат?
+                                </span>
+                                <span class="faq-icon text-[#78dd7e] text-[60px] sm:text-[65px] md:text-[71px] font-medium leading-[75px] sm:text-[80px] md:leading-[88px] transition-transform duration-300">
+                                +
+                                </span>
+                            </button>
+
+                            <!-- ПАНЕЛЬ с анимируемой высотой -->
+                            <div class="faq-panel grid grid-rows-[0fr] transition-[grid-template-rows] duration-500 ease-out mt-4">
+                                <div class="overflow-hidden">
+                                <!-- Контент с fade/slide -->
+                                <div class="faq-content opacity-0 translate-y-1 transition-all duration-500 ease-out">
+                                    <p class="text-gray-600">
+                                    Да, мы предлагаем подарочные сертификаты на любую сумму.
+                                    </p>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item border-b border-gray-200 pb-4">
+                            <button onclick="toggleFAQ(3)"
+                                    class="faq-btn cursor-pointer w-full text-left flex justify-between items-center">
+                                <span class="text-[22px] sm:text-[24px] md:text-[27px] font-medium text-black font-montserrat leading-[28px] sm:leading-[30px] md:leading-[34px]">
+                                Во сколько заселение и выселение?
+                                </span>
+                                <span class="faq-icon text-[#78dd7e] text-[60px] sm:text-[65px] md:text-[71px] font-medium leading-[75px] sm:text-[80px] md:leading-[88px] transition-transform duration-300">
+                                +
+                                </span>
+                            </button>
+
+                            <!-- ПАНЕЛЬ с анимируемой высотой -->
+                            <div class="faq-panel grid grid-rows-[0fr] transition-[grid-template-rows] duration-500 ease-out mt-4">
+                                <div class="overflow-hidden">
+                                <!-- Контент с fade/slide -->
+                                <div class="faq-content opacity-0 translate-y-1 transition-all duration-500 ease-out">
+                                    <p class="text-gray-600">
+                                    Заселение с 15:00, выселение до 12:00.
+                                    </p>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="faq-item border-b border-gray-200 pb-4">
+                            <button onclick="toggleFAQ(4)"
+                                    class="faq-btn cursor-pointer w-full text-left flex justify-between items-center">
+                                <span class="text-[22px] sm:text-[24px] md:text-[27px] font-medium text-black font-montserrat leading-[28px] sm:leading-[30px] md:leading-[34px]">
+                                Можно ли к вам с питомцами?
+                                </span>
+                                <span class="faq-icon text-[#78dd7e] text-[60px] sm:text-[65px] md:text-[71px] font-medium leading-[75px] sm:text-[80px] md:leading-[88px] transition-transform duration-300">
+                                +
+                                </span>
+                            </button>
+
+                            <!-- ПАНЕЛЬ с анимируемой высотой -->
+                            <div class="faq-panel grid grid-rows-[0fr] transition-[grid-template-rows] duration-500 ease-out mt-4">
+                                <div class="overflow-hidden">
+                                <!-- Контент с fade/slide -->
+                                <div class="faq-content opacity-0 translate-y-1 transition-all duration-500 ease-out">
+                                    <p class="text-gray-600">
+                                        Да, размещение с питомцами возможно по предварительному согласованию.
+                                    </p>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Location Section -->
+    <section id="maps" class="w-full py-16">
+        <h2 class="text-[24px] sm:text-[26px] md:text-[28px] font-extrabold text-black font-montserrat leading-[32px] sm:leading-[35px] md:leading-[39px] text-center mb-16">
+            Где мы находимся?
+        </h2>
+        
+        <div class="flex lg:flex-row flex-col relative w-full h-[696px]">
+            <!-- Map Image -->
+             <div class=" w-full lg:w-1/2">
+
+                <div style="position:relative; overflow:hidden;">
+                    <a href="https://yandex.ru/maps/org/sylva_river/25954391969/?utm_medium=mapframe&utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:0px;">
+                        Сылва Ривер
+                    </a>
+                    <a href="https://yandex.ru/maps/11108/perm-krai/category/glamping/112956978208/?utm_medium=mapframe&utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:14px;">
+                        Глэмпинг в Пермском крае
+                    </a>
+                    <a href="https://yandex.ru/maps/11108/perm-krai/category/banquet_hall/184108315/?utm_medium=mapframe&utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:28px;">
+                        Банкетный зал в Пермском крае
+                    </a>
+                    <iframe class="h-[296px] lg:h-[696px]" src="https://yandex.ru/map-widget/v1/?ll=56.656879%2C57.956257&mode=poi&poi%5Bpoint%5D=56.652194%2C57.958788&poi%5Buri%5D=ymapsbm1%3A%2F%2Forg%3Foid%3D25954391969&z=15.2" frameborder="1" allowfullscreen="true" style="width:100%; position:relative;"></iframe>
+                </div>
+            </div>
+            
+            <!-- Location Info -->
+            <div class=" w-full lg:w-1/2 h-full bg-[#caf3cc] flex items-start justify-center pt-12 px-6 lg:px-12">
+                <div class="max-w-lg">
+                    <p class="text-[15px] sm:text-[16px] md:text-[17px] font-medium text-black font-montserrat leading-[18px] sm:leading-[19px] md:leading-[21px] mb-8">
+                        SYLVA RIVER находится на территории хутора Русское Поле, в 30 минутах езды от центра Перми. Эко-парк располагается сразу при въезде в хутор, справа от ворот.
+                        <br /><br />
+                        Добраться можно на машине и оставить ее на парковке, территория охраняется. Из перми можно также приехать на автобусе Пермь – Жебреи, ехать до остановки «Сады Загорье» (однако придется пройти пешком примерно 4 км).
+                    </p>
+                    
+                    <div class="space-y-2">
+                        <div class="flex items-center gap-2">
+                            <img src="assets/images/img_free_icon_placeholder_1180805.svg" class="w-[18px] h-[18px]" alt="location" />
+                            <span class="text-[15px] sm:text-[16px] md:text-[17px] font-normal text-black font-onest leading-[20px] sm:leading-[21px] md:leading-[22px]">Пермский муниципальный округ,<br>хутор Русское Поле</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <img src="assets/images/img_free_icon_telephone_159832_green_300_04.svg" class="w-[18px] h-[18px]" alt="phone" />
+                            <span class="text-[15px] sm:text-[16px] md:text-[17px] font-normal text-black font-onest leading-[20px] sm:leading-[21px] md:leading-[22px]">+7 952 352 32-15</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Decorative Tree -->
+            <img src="assets/images/img_tree_h03_1_346x300.png" class="absolute bottom-0 right-0 w-[200px] lg:w-[300px] h-[250px] lg:h-[346px] object-cover" alt="Tree decoration" />
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="w-full bg-[#4b4b4b] px-4 sm:px-6 lg:px-[120px] py-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col lg:flex-row justify-between items-start gap-8">
+                <!-- Logo and Contact -->
+                <div class="flex flex-col gap-6">
+                    <img src="assets/images/img_group.svg" class="w-[178px] h-[52px]" alt="Sylva River Logo" />
+                    
+                    <div class="space-y-2">
+                        <div class="flex items-center gap-2">
+                            <img src="assets/images/img_free_icon_placeholder_1180805.svg" class="w-[18px] h-[18px]" alt="location" />
+                            <span class="text-[15px] sm:text-[16px] md:text-[17px] font-normal text-white font-onest leading-[20px] sm:leading-[21px] md:leading-[22px]">Пермский муниципальный округ,<br>хутор Русское Поле</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <img src="assets/images/img_free_icon_telephone_159832_green_300_04.svg" class="w-[18px] h-[18px]" alt="phone" />
+                            <span class="text-[15px] sm:text-[16px] md:text-[17px] font-normal text-white font-onest leading-[20px] sm:leading-[21px] md:leading-[22px]">+7 952 352 32-15</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Navigation Menu -->
+                <div class="flex flex-col gap-2">
+                    <h3 class="text-[15px] sm:text-[16px] md:text-[17px] font-bold text-white font-onest leading-[20px] sm:leading-[21px] md:leading-[22px] mb-2">Меню</h3>
+            <a href="#hero" class="text-[15px] sm:text-[16px] md:text-[17px] font-light text-white font-onest leading-[20px] sm:leading-[21px] md:leading-[22px] hover:text-[#93d989] transition-colors">Главная</a>
+                    <a href="#events" class="text-[15px] sm:text-[16px] md:text-[17px] font-light text-white font-onest leading-[20px] sm:leading-[21px] md:leading-[22px] hover:text-[#93d989] transition-colors">Мероприятия</a>
+                    <a href="#houses" class="text-[15px] sm:text-[16px] md:text-[17px] font-light text-white font-onest leading-[20px] sm:leading-[21px] md:leading-[22px] hover:text-[#93d989] transition-colors">Наши дома</a>
+                    <a href="#services" class="text-[15px] sm:text-[16px] md:text-[17px] font-light text-white font-onest leading-[20px] sm:leading-[21px] md:leading-[22px] hover:text-[#93d989] transition-colors">Услуги</a>                    
+                </div>
+                
+                <!-- Additional Services -->
+                <div class="flex flex-col gap-2">
+                    <a href="#booking" class="text-[15px] sm:text-[16px] md:text-[17px] font-light text-white font-onest leading-[20px] sm:leading-[21px] md:leading-[22px] hover:text-[#93d989] transition-colors">Бронирование</a>
+                    <a href="#faq" class="text-[15px] sm:text-[16px] md:text-[17px] font-light text-white font-onest leading-[20px] sm:leading-[21px] md:leading-[22px] hover:text-[#93d989] transition-colors">Частые вопросы</a>
+                    <a href="#maps" class="text-[15px] sm:text-[16px] md:text-[17px] font-light text-white font-onest leading-[20px] sm:leading-[21px] md:leading-[22px] hover:text-[#93d989] transition-colors">Где находимся</a>
+                </div>
+                
+                <!-- Made by -->
+                <div class="flex items-center gap-2">
+                    <span class="text-[20px] sm:text-[21px] md:text-[23px] font-medium text-white font-sf-pro leading-[24px] sm:leading-[26px] md:leading-[28px]">Made by</span>
+                    <div class="flex flex-col">
+                        <span class="text-[18px] sm:text-[19px] md:text-[21px] font-light text-white font-gilroy leading-[22px] sm:leading-[24px] md:leading-[26px] uppercase">danil kaysin</span>
+                        <div class="w-[112px] h-[1px] bg-white mt-1"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="scripts/overlay.js" defer></script>    
+    <script src="scripts/slider.js" defer></script>
+    <script src="scripts/menu.js" defer></script>
+    <script src="scripts/maps.js" defer></script>
+
+    <script>
+        
+        // FAQ toggle
+        function toggleFAQ(index) {
+  const items = document.querySelectorAll('.faq-item');
+
+  items.forEach((item, i) => {
+    const panel   = item.querySelector('.faq-panel');
+    const content = item.querySelector('.faq-content');
+    const icon    = item.querySelector('.faq-icon');
+    const isOpen  = item.classList.contains('is-open');
+
+    if (i === index) {
+      // переключаем текущий
+      if (isOpen) {
+        item.classList.remove('is-open');
+        panel.classList.remove('grid-rows-[1fr]');
+        content.classList.add('opacity-0','translate-y-1');
+        icon.classList.remove('rotate-45');
+      } else {
+        item.classList.add('is-open');
+        panel.classList.add('grid-rows-[1fr]');
+        content.classList.remove('opacity-0','translate-y-1');
+        icon.classList.add('rotate-45');
+      }
+    } else {
+      // закрываем остальные
+      item.classList.remove('is-open');
+      panel.classList.remove('grid-rows-[1fr]');
+      content.classList.add('opacity-0','translate-y-1');
+      icon.classList.remove('rotate-45');
+    }
+  });
+}
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Add hover effects
+         document.addEventListener('DOMContentLoaded', function () {
+    const buttons = document.querySelectorAll('button');
+
+    buttons.forEach(btn => {
+      // Базовая плавность
+      btn.style.transition = 'transform 200ms ease';
+
+      // Мышь (десктоп)
+      btn.addEventListener('pointerenter', () => {
+        // ховер
+        btn.style.transform = 'scale(1.05)';
+      });
+      btn.addEventListener('pointerleave', () => {
+        btn.style.transform = 'scale(1)';
+      });
+
+      // Тач/клик
+      btn.addEventListener('pointerdown', () => {
+        // эффект нажатия
+        btn.style.transform = 'scale(0.95)';
+      });
+      btn.addEventListener('pointerup', () => {
+        // краткий "возврат" ховера
+        btn.style.transform = 'scale(1.05)';
+        // а затем мягко вернуться к норме
+        setTimeout(() => {
+          // Если палец ушёл с кнопки/курсор вне — вернём к 1, иначе оставим hover
+          const rect = btn.getBoundingClientRect();
+          const within =
+            window.event && 'clientX' in window.event && 'clientY' in window.event
+              ? (window.event.clientX >= rect.left && window.event.clientX <= rect.right &&
+                 window.event.clientY >= rect.top  && window.event.clientY <= rect.bottom)
+              : false;
+          btn.style.transform = within ? 'scale(1.05)' : 'scale(1)';
+        }, 150);
+      });
+
+      // На случай отмены жеста
+      btn.addEventListener('pointercancel', () => {
+        btn.style.transform = 'scale(1)';
+      });
+      // Если тач ушёл за пределы
+      btn.addEventListener('lostpointercapture', () => {
+        btn.style.transform = 'scale(1)';
+      });
+    });
+  });
+    </script>
+</body>
+</html>
