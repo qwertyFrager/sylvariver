@@ -44,3 +44,38 @@ const swiper = new Swiper('#houses-swiper', {
 
   // Начальная подсветка
   updateTabs(0);
+
+
+ document.querySelectorAll('.house-inner').forEach((galleryEl) => {
+    const prev = galleryEl.parentElement.querySelector('.house-inner-prev');
+    const next = galleryEl.parentElement.querySelector('.house-inner-next');
+    const pagination = galleryEl.querySelector('.house-inner-pagination');
+
+    new Swiper(galleryEl, {
+      loop: true,
+      nested: true,                  // обязательно для вложенных слайдеров
+      speed: 500,
+      spaceBetween: 12,
+      navigation: { prevEl: prev, nextEl: next },      
+      preloadImages: false,
+      lazy: { loadOnTransitionStart: true },
+      watchSlidesProgress: true
+    });
+  });
+
+  document.querySelectorAll('.service-gallery').forEach((galEl) => {
+    const prev = galEl.parentElement.querySelector('.service-prev');
+    const next = galEl.parentElement.querySelector('.service-next');
+    const pagination = galEl.querySelector('.service-pagination');
+
+    new Swiper(galEl, {
+      loop: true,
+      nested: true,               // важно для вложенных слайдеров
+      speed: 500,
+      spaceBetween: 8,
+      navigation: { prevEl: prev, nextEl: next },      
+      preloadImages: false,
+      lazy: { loadOnTransitionStart: true },
+      watchSlidesProgress: true
+    });
+  });
