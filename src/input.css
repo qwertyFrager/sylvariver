@@ -1,1 +1,8 @@
 @import "tailwindcss";
+
+@layer base {
+  /* по умолчанию Fira Sans Condensed */
+  html { font-family: "Fira Sans Condensed", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji"; }
+  /* h1 — TT Bluescreens Trial */
+  h1 { font-family: "TT Bluescreens Trial","Fira Sans Condensed", ui-sans-serif, system-ui, sans-serif; }
+}

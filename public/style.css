@@ -1,0 +1,320 @@
+/* твои переменные цветов (rgb без запятых — удобно для прозрачности) */
+:root{
+  --color-primary: 48 68 57;
+  --color-accent: 120 186 109;
+  --color-secondary: 40 40 40;   
+  --color-bg: 245 252 222;     
+}
+
+body{
+  color: rgb(var(--color-secondary) / var(--tw-text-opacity,1));
+  border-color: rgb(var(--color-secondary) / var(--tw-text-opacity,1));
+}
+
+  .text-primary   { color: rgb(var(--color-primary) / var(--tw-text-opacity,1)); }
+  .bg-primary     { background-color: rgb(var(--color-primary) / var(--tw-bg-opacity,1)); }
+  .border-primary {border-color: rgb(var(--color-primary) / var(--tw-bg-opacity,1));}
+
+  .text-secondary { color: rgb(var(--color-secondary) / var(--tw-text-opacity,1)); }
+  .bg-secondary { background-color: rgb(var(--color-secondary) / var(--tw-bg-opacity,1)); }
+  .border-secondary {border-color: rgb(var(--color-secondary) / var(--tw-bg-opacity,1));}
+
+  .text-bg { color: rgb(var(--color-bg) / var(--tw-text-opacity,1)); }
+  .bg-bg        { background-color: rgb(var(--color-bg) / var(--tw-bg-opacity,1)); }
+  .border-bg {border-color: rgb(var(--color-bg) / var(--tw-bg-opacity,1));}
+
+  .text-accent { color: rgb(var(--color-accent) / var(--tw-text-opacity,1)); }
+  .bg-accent    { background-color: rgb(var(--color-accent) / var(--tw-bg-opacity,1)); }
+  .border-accent {border-color: rgb(var(--color-accent) / var(--tw-bg-opacity,1));}
+
+@font-face{
+  font-family: "TT Bluescreens Trial";
+  src: url("assets/fonts/TT_Bluescreens_Trial_Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face{
+  font-family: "Fira Sans Condensed";
+  src: url("assets/fonts/FiraSansCondensed-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face{
+  font-family: "Fira Sans Condensed";
+  src: url("assets/fonts/FiraSansCondensed-Italic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Базовые настройки */
+#overlay{
+  /* настраиваемость эффекта */
+  --r: 260px;        /* "ядро" подсветки */
+  --feather: 700px;  /* насколько далеко растекается свет */
+  --spot: .1;       /* прозрачность в центре (0=дырка, 1=без подсветки) */
+  --blur: 2px;       /* сила блюра при наведении */
+
+  /* фон всегда затемнён */
+  background: rgba(0,0,0,.50);
+
+  /* без маски и без блюра по умолчанию — равномерная тень */
+  transition: backdrop-filter .25s ease;
+  will-change: mask-image, -webkit-mask-image;
+}
+
+/* при наведении включаем мягкую маску и блюр */
+#overlay.is-on{
+  /* центр — не прозрачный, а лишь ЧУТЬ менее тёмный,
+     затемность нарастает очень плавно по всей площади */
+  mask-image: radial-gradient(
+    circle calc(var(--r) + var(--feather)) at var(--x) var(--y),
+      rgba(0,0,0,var(--spot)) 0,
+      rgba(0,0,0,.40)         var(--r),
+      rgba(0,0,0,.85)         calc(var(--r) + var(--feather)*.7),
+      black                   calc(var(--r) + var(--feather))
+  );
+  -webkit-mask-image: radial-gradient(
+    circle calc(var(--r) + var(--feather)) at var(--x) var(--y),
+      rgba(0,0,0,var(--spot)) 0,
+      rgba(0,0,0,.40)         var(--r),
+      rgba(0,0,0,.85)         calc(var(--r) + var(--feather)*.7),
+      black                   calc(var(--r) + var(--feather))
+  );
+
+  /* блюр добавляется только в активном состоянии */
+  backdrop-filter: blur(var(--blur));
+}
+
+/* если нужно уважить reduce motion */
+@media (prefers-reduced-motion: reduce){
+  #overlay{ transition: none; }
+}
+
+/* состояния видимого "нижнего" хедера */
+#site-header.is-visible {
+  transform: translateY(0);  
+}
+
+/* фоновый слой по умолчанию скрыт (в т.ч. на самом верху hero) */
+#site-header .header-bg {
+    opacity: 0;
+    top: 0; /* фона нет */
+}
+
+/* фон: становится видимым и смещается только НИЖЕ hero */
+#site-header.is-below .header-bg {
+    opacity: 1;
+    transform: translate(0, -15%);  
+}
+
+#site-header.is-below {
+    color: rgb(var(--color-secondary) / var(--tw-text-opacity,1));
+}
+#site-header.is-below svg{
+    fill: rgb(var(--color-secondary) / var(--tw-text-opacity,1));;
+}
+#site-header.is-below .menu-cross{
+    background-color: rgb(var(--color-secondary) / var(--tw-text-opacity,1));;
+}
+
+#site-header .cta-book{
+    display: none;
+}
+#site-header.is-below .cta-book{
+    display: inline-flex;
+}
+
+/* Слой c контуром */
+.cta-book::before,
+.cta-book::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background-position:center;
+  background-repeat:no-repeat;
+  background-size:100% 100%;
+  transition:opacity .3s ease, transform .3s ease;
+  pointer-events:none;
+}
+
+/* Outline-версия — видна изначально */
+.cta-book::before{
+  background-image:url('assets/images/btn-outline.svg');
+  opacity:1;
+}
+
+/* Залитая версия — проявляется при hover/focus */
+.cta-book::after{
+  background-image:url('assets/images/btn-filled.svg');
+  opacity:0;
+}
+
+/* Состояние наведения/фокуса */
+.cta-book:hover::after,
+.cta-book:focus-visible::after{
+  opacity:1;
+}
+.cta-book:hover::before,
+.cta-book:focus-visible::before{
+  opacity:0;
+}
+
+/* (опционально) лёгкий микро-скейл для живости */
+.cta-book:hover::after{ transform:scale(1.01); }
+.cta-book:active::after{ transform:scale(0.99); }
+
+/* reduce motion — без анимаций */
+@media (prefers-reduced-motion: reduce){
+  .cta-book::before,
+  .cta-book::after,
+  .cta-book span{ transition:none; }
+}
+
+
+/* Блок-контейнер кнопок: плавный сдвиг, чтобы "Свернуть" не перекрывала фото */
+.collage-cta{
+  transition: transform .35s ease;
+}
+
+
+/* Кнопка коллажа в стиле cta-book */
+.cta-collage::before,
+.cta-collage::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background-position:center;
+  background-repeat:no-repeat;
+  background-size:100% 100%;
+  transition:opacity .3s ease, transform .3s ease;
+  pointer-events:none;
+}
+
+/* по умолчанию — outline-версия */
+.cta-collage::before{
+  background-image:url('assets/images/btn-outline.svg');
+  opacity:1;
+}
+/* залитая версия — на hover/focus */
+.cta-collage::after{
+  background-image:url('assets/images/btn-filled.svg');
+  opacity:0;
+}
+
+/* Hover/focus */
+.cta-collage:hover::after,
+.cta-collage:focus-visible::after{ opacity:1; }
+.cta-collage:hover::before,
+.cta-collage:focus-visible::before{ opacity:0; }
+.cta-collage:hover::after{ transform:scale(1.01); }
+.cta-collage:active::after{ transform:scale(0.99); }
+
+/* reduce motion */
+@media (prefers-reduced-motion: reduce){
+  .cta-collage::before,
+  .cta-collage::after,
+  .cta-collage span{ transition:none; }
+}
+
+
+
+/* красивый фон при открытом диалоге */
+#lightbox::backdrop {
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(2px);
+}
+
+
+/* Изначально показываем 1 полный ряд + половину 2-го; тень накрывает низ */
+#collage-wrap.collage--collapsed {
+  max-height: 150vw; /* на широких экранах: 1.5 ширины секции ≈ 1.5 ряда */
+  overflow: hidden;
+}
+
+/* чуть меньше клиппинг на больших экранах */
+@media (min-width: 1024px) {
+  #collage-wrap.collage--collapsed { max-height: 120vh; }
+}
+
+/* если нет tailwind arbitrary properties, на всякий случай
+   можно заменить [aspect-ratio:1/1] на это: */
+.collage-square { aspect-ratio: 1 / 1; }
+
+/* Плавное раскрытие/сворачивание по height (не max-height) */
+#collage-wrap {
+  position: relative;
+  overflow: hidden;
+  will-change: height;
+  transition: height 600ms cubic-bezier(.2,.7,.2,1);
+  /* стартовое значение задаём скриптом */
+}
+
+/* тень */
+#collage-fade {
+  transition: opacity 400ms ease;
+  opacity: 1;
+}
+#collage-wrap.is-open #collage-fade {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* чуть приятнее рендер на Safari/Chrome */
+#collage-wrap { contain: layout paint; }
+
+
+#menuToggle.active .line-1 { transform: translateY(9px) rotate(45deg); }
+#menuToggle.active .line-2 { opacity: 0; }
+#menuToggle.active .line-3 { transform: translateY(-9px) rotate(-45deg); }
+
+/* ПК-кнопка активна — превращаемся в крест */
+#menuToggleDesktop.active .d-line-1 { transform: translateY(9px) rotate(45deg); }
+#menuToggleDesktop.active .d-line-2 { opacity: 0; }
+#menuToggleDesktop.active .d-line-3 { transform: translateY(-9px) rotate(-45deg); }
+
+.swiper-pagination-bullet { background: #d1d5db; opacity: 1; }
+.swiper-pagination-bullet-active { background: #93d989; }     
+        
+.service-prev, .service-next { opacity: 70%; }
+.service-prev:hover, .service-next:hover { cursor: pointer; opacity: 100%; }
+        
+.scrollbar-hidden::-webkit-scrollbar {
+    display: none; /* для Chrome, Safari */
+}
+
+.swiper-pagination .swiper-pagination-bullet{
+    opacity: 0.5;
+}
+
+.swiper-pagination .swiper-pagination-bullet-active{
+    background-color: rgb(var(--color-bg) / var(--tw-bg-opacity,1));
+    opacity: 1;
+}
+
+button{
+    cursor: pointer;
+}
+
+@keyframes decorFloat {
+  0%   { transform: translateX(0) rotate(0deg); }
+  25%  { transform: translateX(5px) rotate(2deg); }
+  50%  { transform: translateX(0) rotate(0deg); }
+  75%  { transform: translateX(-5px) rotate(-2deg); }
+  100% { transform: translateX(0) rotate(0deg); }
+}
+
+.decor-animate {
+  animation: decorFloat 4s ease-in-out infinite;
+}
+
+
+
+@media (prefers-reduced-motion: no-preference){
+  .house { transition: transform .3s ease; }
+  .house:hover { transform: translateY(-2px); }
+}
