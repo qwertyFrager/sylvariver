@@ -272,11 +272,6 @@ body{
 #menuToggle.active .line-2 { opacity: 0; }
 #menuToggle.active .line-3 { transform: translateY(-9px) rotate(-45deg); }
 
-/* ПК-кнопка активна — превращаемся в крест */
-#menuToggleDesktop.active .d-line-1 { transform: translateY(9px) rotate(45deg); }
-#menuToggleDesktop.active .d-line-2 { opacity: 0; }
-#menuToggleDesktop.active .d-line-3 { transform: translateY(-9px) rotate(-45deg); }
-
 .swiper-pagination-bullet { background: #d1d5db; opacity: 1; }
 .swiper-pagination-bullet-active { background: #93d989; }     
         
@@ -293,6 +288,11 @@ body{
 
 .swiper-pagination .swiper-pagination-bullet-active{
     background-color: rgb(var(--color-bg) / var(--tw-bg-opacity,1));
+    opacity: 1;
+}
+
+.swiper-pagination-extra .swiper-pagination-bullet-active{
+    background-color: rgb(var(--color-primary) / var(--tw-bg-opacity,1)) !important;
     opacity: 1;
 }
 

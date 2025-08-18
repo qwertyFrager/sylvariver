@@ -273,7 +273,46 @@ document.querySelectorAll('[data-house]').forEach((card) => {
 })();
 
 
-// ==== Галереи в блоке "Чем у нас заняться" (карточки-услуги) ====
+// --- мобильный слайдер для секции "Чем у нас заняться?" ---
+(function () {
+  const container = document.getElementById('events-cards');
+  if (!container) return;
+
+  let eventsSwiper = null;
+  const mq = window.matchMedia('(min-width: 768px)'); // lg от Tailwind
+
+  function enable() {
+    if (eventsSwiper) return;
+    eventsSwiper = new Swiper(container, {
+      loop: true,
+      slidesPerView: 1,
+      spaceBetween: 16,           // расстояние между карточками на мобиле
+      speed: 500,
+      pagination: { el: '.events-pagination', clickable: true },
+            navigation: {
+        prevEl: '.events-prev',
+        nextEl: '.events-next',
+      },
+      watchSlidesProgress: true,
+    });
+  }
+
+  function disable() {
+    if (!eventsSwiper) return;
+    eventsSwiper.destroy(true, true); // очищаем инлайны и классы
+    eventsSwiper = null;
+  }
+
+  function check() {
+    if (mq.matches) disable();   // >= lg: сетка, без слайдера
+    else enable();               // < lg: мобильный слайдер
+  }
+
+  mq.addEventListener ? mq.addEventListener('change', check) : mq.addListener(check);
+  check();
+})();
+
+// --- (рекомендуется) nested=true для внутренних галерей услуг ---
 document.querySelectorAll('[data-service]').forEach((card) => {
   const gal = card.querySelector('.service-gallery');
   const prev = card.querySelector('.service-prev');
@@ -281,7 +320,7 @@ document.querySelectorAll('[data-service]').forEach((card) => {
   const pag  = card.querySelector('.service-pagination');
   if (!gal) return;
 
-  const sw = new Swiper(gal, {
+  new Swiper(gal, {
     loop: true,
     speed: 600,
     spaceBetween: 12,
@@ -290,14 +329,14 @@ document.querySelectorAll('[data-service]').forEach((card) => {
     preloadImages: false,
     lazy: { loadOnTransitionStart: true },
     watchSlidesProgress: true,
+    nested: true, // важно при вложенном слайдере
   });
 
-  // Открытие в ЛАЙТБОКСЕ — только фото этой карточки
+  // Лайтбокс для фото услуги — остаётся как было у тебя
   const imgs = card.querySelectorAll('.service-gallery .swiper-slide:not(.swiper-slide-duplicate) img');
   imgs.forEach((img, idx) => {
     img.addEventListener('click', () => {
       if (typeof lightboxInitFor !== 'function' || typeof dlg === 'undefined') return;
-      // передаём корень именно этой галереи — лайтбокс листает её
       lightboxSetSources(gal);
       lightboxShowAt(idx);
       try { dlg.showModal(); } catch { dlg.setAttribute('open', ''); }
