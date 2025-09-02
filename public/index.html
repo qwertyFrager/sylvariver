@@ -411,7 +411,7 @@
     </section>
     
     <!-- Event Organization Section -->
-    <section id="general" class="relative flex flex-col items-center w-full px-4 sm:px-6 lg:px-30 py-16 lg:py-24">
+    <section id="general" class="relative flex flex-col items-center w-full px-4 sm:px-0 lg:px-30 py-16 lg:py-24">
         <div class="relative flex justify-center">
             <img 
                 src="assets/images/leaf.svg"
@@ -423,17 +423,17 @@
             </h1>
         </div>
         
-        <div class="flex max-w-160 text-center text-xl">
+        <div class="flex max-w-220 text-center text-xl">
             ЭКО Парк Sylva River – это место находящееся в 30 минутах от города наполненное природой и умиротворением, все сооружения выполнены из материалов добытых на земле парка! Тут Вы по настоящему насладитесь силой уральской природы! Чистейший воздух перезагрузит Ваше сознание, а красивейший вид на могучую реку Сылва вызывает мурашки… Столь живописное место, окруженное вековыми деревьями и зеркальной гладью реки, создаст атмосферу полного погружения в природную идиллию. Здесь время замедляет ход, а каждый звук – пение птиц, шелест листвы или плеск воды – наполняет душу спокойствием
         </div>
 
 
             <!-- MAIN GALLERY -->
-<div class="w-full  mx-auto mt-12">
-  <!-- Swiper -->
+<!-- <div class="w-full  mx-auto mt-12">
+
   <div id="main-swiper" class="swiper h-full lg:h-[80vh] rounded-3xl overflow-hidden select-none">
     <div class="swiper-wrapper">
-      <!-- СЛАЙД 1 -->
+
       <div class="swiper-slide flex items-center justify-center">
         <div class="swiper-zoom-container ">            
           <img
@@ -445,7 +445,6 @@
         </div>
       </div>
 
-      <!-- СЛАЙД 2 -->
       <div class="swiper-slide flex items-center justify-center">
         <div class="swiper-zoom-container">
           <img
@@ -457,7 +456,6 @@
         </div>
       </div>
 
-      <!-- СЛАЙД 3 -->
       <div class="swiper-slide flex items-center justify-center">
         <div class="swiper-zoom-container">
           <img
@@ -470,10 +468,8 @@
       </div>
     </div>
 
-    <!-- Пагинация -->
     <div class="swiper-pagination !bottom-4"></div>
 
-    <!-- Стрелки -->
     <button id="prev-main"
       class="group absolute left-3 top-1/2 -translate-y-1/2 z-10 grid place-items-center w-11 h-11 rounded-full bg-bg hover:opacity-100 opacity-90 backdrop-blur text-secondary">
       <span class="sr-only">Предыдущий</span>
@@ -486,535 +482,9 @@
       &#10095;
     </button>
   </div>
-</div>
+</div> -->
 
-            <!-- ЛАЙТБОКС (нативный <dialog>) -->
-            <dialog id="lightbox"
-            class="max-w-full max-h-full p-0 m-0 w-full h-full bg-black/90 backdrop:backdrop-blur">
-            <div class="relative w-full h-full">
-                <!-- Холст для панорамирования -->
-                <div id="lightbox-stage"
-                    class="cursor-grab absolute inset-0 grid place-items-center overflow-hidden touch-pan-y">
-                <img id="lightbox-img" src="" alt=""
-                    class="max-w-[150vw] max-h-[150vh] h-[75vh] w-[75vw] object-contain select-none will-change-transform"
-                    draggable="false" />
-                </div>
-
-                <!-- Верхняя панель -->
-                <button id="lightbox-close"
-                class="absolute top-4 right-4 px-4 py-2 rounded-full bg-white/90 hover:bg-white text-black text-sm shadow">
-                Закрыть ✕
-                </button>
-
-                <!-- Нижняя панель инструментов -->
-                <div class="absolute left-1/2 -translate-x-1/2 bottom-6 flex items-center gap-2
-                            rounded-full bg-white/90 backdrop-blur px-3 py-2 shadow">
-                <button id="zoom-out" class="px-3 py-1 rounded-full hover:bg-white text-black">−</button>
-                <div id="zoom-level" class="min-w-14 text-center text-sm text-black">100%</div>
-                <button id="zoom-in" class="px-3 py-1 rounded-full hover:bg-white text-black">+</button>
-                <span class="mx-1 h-5 w-px bg-black/20"></span>
-                <button id="fit-screen" class="px-3 py-1 rounded-full hover:bg-white text-black">По экрану</button>
-                <button id="zoom-100" class="px-3 py-1 rounded-full hover:bg-white text-black">100%</button>
-                </div>
-            </div>
-
-            <!-- ЛЕВАЯ/ПРАВАЯ СТРЕЛКИ ВНУТРИ ДИАЛОГА -->
-                <button id="lightbox-prev"
-                class="absolute left-4 top-1/2 -translate-y-1/2 z-10 grid place-items-center w-12 h-12 rounded-full
-                        bg-black/60 hover:bg-black/80 text-white select-none"
-                aria-label="Предыдущее фото">&#10094;</button>
-
-                <button id="lightbox-next"
-                class="absolute right-4 top-1/2 -translate-y-1/2 z-10 grid place-items-center w-12 h-12 rounded-full
-                        bg-black/60 hover:bg-black/80 text-white select-none"
-                aria-label="Следующее фото">&#10095;</button>
-            </dialog>
-    
-    <!-- Слой с декорациями -->
-        <div  data-scroll-scope class="pointer-events-none absolute inset-0 z-10 overflow-visible lg:block hidden">
-            <!-- 1) cloud1 справа, летит направо -->
-            <div class="absolute inset-0 overflow-hidden">
-            <img
-                src="assets/images/cloud3.svg" alt=""
-                class="absolute top-[200px] right-[150px] -scale-x-100"
-                data-parallax
-                data-speed-x="-0.22" data-speed-y="0.1" data-scale="0" />
-            </div>
-
-            <!-- 4) cloud3 слева снизу, летит вправо-вниз и чуть уменьшается -->
-            <img
-                src="assets/images/cloud1.svg" alt=""
-                class="absolute bottom-[50px] -left-[500px]"
-                data-parallax
-                data-speed-x="0.3" data-speed-y="0" data-scale="0" />
-        </div>
-    </section>
-    
-    <section id="separator" class="lg:py-4">
-  <div class="mx-auto w-full overflow-hidden">
-    <div id="sep-track"
-         class="will-change-transform"
-         data-parallax
-         data-from-x="-70%"  
-         data-to-x="0%"      
-         data-from-scale="1"   
-         data-to-scale="1">
-      <img
-        src="assets/images/separator.png"
-        alt=""
-        class="pointer-events-none select-none block max-w-none h-[15vh] lg:h-full" />
-    </div>
-  </div>
-    </section>
-
-    <!-- Houses Section -->
-    <section id="houses" class="relative flex flex-col items-center w-full px-4 sm:px-6 lg:px-30 pt-16 lg:pt-24">
-        <div class="relative flex justify-center">
-            <h1 class="text-7xl lg:text-8xl mb-8 lg:mb-12 text-center">
-                ДОМИКИ ДЛЯ РАЗМЕЩЕНИЯ
-            </h1>
-        </div>
-        
-        <div class="flex max-w-135 text-center text-xl">
-            3 просторных домика с панорамными окнами и большой ресторан для мероприятий
-        </div>
-
-        <!-- Карточка домика -->
-            <div class="mt-12 lg:mt-16 space-y-12 w-full ">
-            <!-- === Домик «Шале» === -->
-            <article data-house class="space-y-4 lg:space-y-8 lg:grid lg:grid-cols-2 gap-8 items-start rounded-3xl w-full">
-                <!-- Галерея -->
-                <div class="relative h-[30vh] sm:h-[50vh] lg:h-full">
-                    <div class="swiper house-gallery rounded-2xl overflow-hidden h-full">
-                        <div class="swiper-wrapper h-full">
-                            <div class="swiper-slide">
-
-                                <img src="assets/images/houses/kiprey-1.jpg" alt="Домик «Кипрей» 1"
-                                    class="w-full h-full object-cover cursor-zoom-in" loading="lazy">
-          
-                            </div>
-                            <div class="swiper-slide">
-
-                                <img src="assets/images/houses/kiprey-2.jpg" alt="Домик ««Кипрей» 2"
-                                    class="w-full h-full object-cover cursor-zoom-in" loading="lazy">
-  
-                            </div>
-                            <div class="swiper-slide">
-
-                                <img src="assets/images/houses/kiprey-3.jpg" alt="Домик ««Кипрей» 3"
-                                    class="w-full h-full object-cover cursor-zoom-in" loading="lazy">
-
-                            </div>
-                            <div class="swiper-slide">
-
-                                <img src="assets/images/houses/kiprey-4.jpg" alt="Домик ««Кипрей» 4"
-                                    class="w-full h-full object-cover cursor-zoom-in" loading="lazy">
-
-                            </div>
-                            <div class="swiper-slide">
-
-                                <img src="assets/images/houses/kiprey-5.jpg" alt="Домик ««Кипрей» 5"
-                                    class="w-full h-full object-cover cursor-zoom-in" loading="lazy">
-
-                            </div>
-                            <div class="swiper-slide">
-
-                                <img src="assets/images/houses/kiprey-6.jpg" alt="Домик ««Кипрей» 6"
-                                    class="w-full h-full object-cover cursor-zoom-in" loading="lazy">
-
-                            </div>
-                            <div class="swiper-slide">
-
-                                <img src="assets/images/houses/kiprey-7.jpg" alt="Домик ««Кипрей» 7"
-                                    class="w-full h-full object-cover cursor-zoom-in" loading="lazy">
-
-                            </div>
-                            <div class="swiper-slide">
-
-                                <img src="assets/images/houses/kiprey-8.jpg" alt="Домик ««Кипрей» 8"
-                                    class="w-full h-full object-cover cursor-zoom-in" loading="lazy">
-
-                            </div>
-                            <div class="swiper-slide">
-
-                                <img src="assets/images/houses/kiprey-9.jpg" alt="Домик ««Кипрей» 9"
-                                    class="w-full h-full object-cover cursor-zoom-in" loading="lazy">
-
-                            </div>
-                            <div class="swiper-slide">
-
-                                <img src="assets/images/houses/kiprey-10.jpg" alt="Домик ««Кипрей» 10"
-                                    class="w-full h-full object-cover cursor-zoom-in" loading="lazy">
-
-                            </div>
-                            <div class="swiper-slide">
-
-                                <img src="assets/images/houses/kiprey-11.jpg" alt="Домик «Кипрей» 11"
-                                    class="w-full h-full object-cover cursor-zoom-in" loading="lazy">
-          
-                            </div>
-                            <div class="swiper-slide">
-
-                                <img src="assets/images/houses/kiprey-12.jpg" alt="Домик ««Кипрей» 12"
-                                    class="w-full h-full object-cover cursor-zoom-in" loading="lazy">
-  
-                            </div>
-                            <div class="swiper-slide">
-
-                                <img src="assets/images/houses/kiprey-13.jpg" alt="Домик ««Кипрей» 13"
-                                    class="w-full h-full object-cover cursor-zoom-in" loading="lazy">
-
-                            </div>
-                            <div class="swiper-slide">
-
-                                <img src="assets/images/houses/kiprey-14.jpg" alt="Домик ««Кипрей» 14"
-                                    class="w-full h-full object-cover cursor-zoom-in" loading="lazy">
-
-                            </div>
-                            <div class="swiper-slide">
-
-                                <img src="assets/images/houses/kiprey-15.jpg" alt="Домик ««Кипрей» 15"
-                                    class="w-full h-full object-cover cursor-zoom-in" loading="lazy">
-
-                            </div>
-                            <div class="swiper-slide">
-
-                                <img src="assets/images/houses/kiprey-16.jpg" alt="Домик ««Кипрей» 16"
-                                    class="w-full h-full object-cover cursor-zoom-in" loading="lazy">
-
-                            </div>
-                        </div>
-                        <div class="house-pagination swiper-pagination !bottom-3"></div>
-                    </div>
-
-                    <!-- Стрелки поверх фото -->
-                    <button class="house-prev group absolute left-3 top-1/2 -translate-y-1/2 z-10 grid place-items-center w-9 h-9 rounded-full bg-bg hover:opacity-100 opacity-90 backdrop-blur text-secondary">&#10094;</button>
-                    <button class="house-next group absolute right-3 top-1/2 -translate-y-1/2 z-10 grid place-items-center w-9 h-9 rounded-full bg-bg hover:opacity-100 opacity-90 backdrop-blur text-secondary">&#10095;</button>
-
-                </div>
-
-                <!-- Контент -->
-                <div class="flex flex-col justify-between gap-4 lg:gap-8 h-full">
-                    <div class="flex flex-col gap-2 lg:gap-4">
-
-                        <h1 class="text-4xl lg:text-6xl">Дом «Кипрей»</h1>
-                        <div class="text-lg italic">до 6 человек</div>
-
-                        <ul class="list-disc pl-5 space-y-2 text-lg">
-                            <li>Дом на холмистом берегу реки Сылва с панорамными видами</li>
-                            <li>2 спальни с двухместными кроватями</li>
-                            <li>Раскладной диван в гостиной</li>
-                            <li>2 санузла (на каждом этаже)</li>
-                            <li>Кухня с полным оснащением: посуда, чайник, плита, холодильник, микроволновая печь</li>
-                            <li>Гостиная с панорамными окнами</li>
-                        </ul>
-                    </div>
-
-                    <div class="flex flex-col gap-4">
-                        <div class="mt-0 lg:mt-2 text-lg italic">
-                            Тариф на 4 человек: <br>
-                            Пн–чт <span>16 000 ₽/сутки</span><br>
-                            Пт–вс <span>18 000 ₽/сутки</span><br>
-                            Доп. гость <span>+1500 ₽</span><br>
-                        </div>
-
-                        <div class="mt-2">
-                            <a href="#header-book">
-                            <button 
-                                style="background-image: url('assets/images/btn-watch-dates.svg');"
-                                class="flex justify-center text-xl
-                                    text-secondary bg-no-repeat bg-center bg-contain
-                                items-center justify-center px-12 py-3 lg:px-20 lg:py-5 text-bg"> Смотреть свободные даты</button>                           
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </article>
-            </div>
-
-            <!-- Карточка домика -->
-            <div class="mt-12 lg:mt-16 space-y-12 w-full ">
-            <!-- === Домик «Шале» === -->
-            <article data-house class="space-y-4 lg:space-y-8 lg:grid lg:grid-cols-2 gap-8 items-start rounded-3xl w-full">
-                <!-- Галерея -->
-                <div class="relative h-[30vh] sm:h-[50vh] lg:h-full">
-                    <div class="swiper house-gallery rounded-2xl overflow-hidden h-full">
-                        <div class="swiper-wrapper h-full">
-                            <div class="swiper-slide">
-
-                                <img src="assets/images/houses/sudak-1.jpg" alt="Домик «Судак» 1"
-                                    class="w-full h-full object-cover cursor-zoom-in" loading="lazy">
-          
-                            </div>
-                            <div class="swiper-slide">
-
-                                <img src="assets/images/houses/sudak-2.jpg" alt="Домик «Судак» 2"
-                                    class="w-full h-full object-cover cursor-zoom-in" loading="lazy">
-  
-                            </div>
-                            <div class="swiper-slide">
-
-                                <img src="assets/images/houses/sudak-3.jpg" alt="Домик «Судак» 3"
-                                    class="w-full h-full object-cover cursor-zoom-in" loading="lazy">
-
-                            </div>
-                            <div class="swiper-slide">
-
-                                <img src="assets/images/houses/sudak-4.jpg" alt="Домик «Судак» 4"
-                                    class="w-full h-full object-cover cursor-zoom-in" loading="lazy">
-          
-                            </div>
-                            <div class="swiper-slide">
-
-                                <img src="assets/images/houses/sudak-5.jpg" alt="Домик «Судак» 5"
-                                    class="w-full h-full object-cover cursor-zoom-in" loading="lazy">
-  
-                            </div>
-                            <div class="swiper-slide">
-
-                                <img src="assets/images/houses/sudak-6.jpg" alt="Домик «Судак» 6"
-                                    class="w-full h-full object-cover cursor-zoom-in" loading="lazy">
-
-                            </div>
-                        </div>
-                        <div class="house-pagination swiper-pagination !bottom-3"></div>
-                    </div>
-
-                    <!-- Стрелки поверх фото -->
-                    <button class="house-prev group absolute left-3 top-1/2 -translate-y-1/2 z-10 grid place-items-center w-9 h-9 rounded-full bg-bg hover:opacity-100 opacity-90 backdrop-blur text-secondary">&#10094;</button>
-                    <button class="house-next group absolute right-3 top-1/2 -translate-y-1/2 z-10 grid place-items-center w-9 h-9 rounded-full bg-bg hover:opacity-100 opacity-90 backdrop-blur text-secondary">&#10095;</button>
-
-                </div>
-
-                <!-- Контент -->
-                <div class="flex flex-col justify-between gap-4 lg:gap-8 h-full">
-                    <div class="flex flex-col gap-2 lg:gap-4">
-
-                        <h1 class="text-4xl lg:text-6xl">Дом «Судак»</h1>
-                        <div class="text-lg italic">до 6 человек</div>
-
-                        <ul class="list-disc pl-5 space-y-2 text-lg">
-                            <li>Спальня на первом этаже с двухместной кроватью</li>
-                            <li>Спальня на втором этаже (второй свет) с двухместной кроватью</li>
-                            <li>Раскладной диван в гостиной</li>
-                            <li>Кухня: посуда, чайник, плита, холодильник, микроволновая печь</li>
-                            <li>Тёплый душ и санузел</li>
-                            <li>Камин в гостиной с панорамным остеклением</li>
-                            <li>Постельное бельё и полотенца предоставляются</li>
-                        </ul>
-                    </div>
-
-                    <div class="flex flex-col gap-4">
-                        <div class="mt-0 lg:mt-2 text-lg italic">
-                            Тариф на 4 человек: <br>
-                            Пн–чт <span>14 000 ₽/сутки</span><br>
-                            Пт–вс <span>16 000 ₽/сутки</span><br>
-                            Доп. гость <span>+1500 ₽</span><br>
-                        </div>
-
-                        <div class="mt-2">
-                            <a href="#header-book">
-                            <button 
-                                style="background-image: url('assets/images/btn-watch-dates.svg');"
-                                class="flex justify-center text-xl
-                                    text-secondary bg-no-repeat bg-center bg-contain
-                                items-center justify-center px-12 py-3 lg:px-20 lg:py-5 text-bg"> Смотреть свободные даты</button>                           
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </article>
-            </div>
-
-            <!-- Карточка домика -->
-            <div class="mt-12 lg:mt-16 space-y-12 w-full ">
-            <!-- === Домик «Шале» === -->
-            <article data-house class="space-y-4 lg:space-y-8 lg:grid lg:grid-cols-2 gap-8 items-start rounded-3xl w-full">
-                <!-- Галерея -->
-                <div class="relative h-[30vh] sm:h-[50vh] lg:h-full">
-                    <div class="swiper house-gallery rounded-2xl overflow-hidden h-full">
-                        <div class="swiper-wrapper h-full">
-                            <div class="swiper-slide">
-
-                                <img src="assets/images/houses/sohatka-1.jpg" alt="Домик «Сохатка» 1"
-                                    class="w-full h-full object-cover cursor-zoom-in" loading="lazy">
-          
-                            </div>
-                            <div class="swiper-slide">
-
-                                <img src="assets/images/houses/sohatka-2.jpg" alt="Домик «Сохатка» 2"
-                                    class="w-full h-full object-cover cursor-zoom-in" loading="lazy">
-  
-                            </div>
-                            <div class="swiper-slide">
-
-                                <img src="assets/images/houses/sohatka-3.jpg" alt="Домик «Сохатка» 3"
-                                    class="w-full h-full object-cover cursor-zoom-in" loading="lazy">
-
-                            </div>
-                            <div class="swiper-slide">
-
-                                <img src="assets/images/houses/sohatka-4.jpg" alt="Домик «Сохатка» 4"
-                                    class="w-full h-full object-cover cursor-zoom-in" loading="lazy">
-  
-                            </div>
-                            <div class="swiper-slide">
-
-                                <img src="assets/images/houses/sohatka-5.jpg" alt="Домик «Сохатка» 5"
-                                    class="w-full h-full object-cover cursor-zoom-in" loading="lazy">
-
-                            </div>
-                        </div>
-                        <div class="house-pagination swiper-pagination !bottom-3"></div>
-                    </div>
-
-                    <!-- Стрелки поверх фото -->
-                    <button class="house-prev group absolute left-3 top-1/2 -translate-y-1/2 z-10 grid place-items-center w-9 h-9 rounded-full bg-bg hover:opacity-100 opacity-90 backdrop-blur text-secondary">&#10094;</button>
-                    <button class="house-next group absolute right-3 top-1/2 -translate-y-1/2 z-10 grid place-items-center w-9 h-9 rounded-full bg-bg hover:opacity-100 opacity-90 backdrop-blur text-secondary">&#10095;</button>
-
-                </div>
-
-                <!-- Контент -->
-                <div class="flex flex-col justify-between gap-4 lg:gap-8 h-full">
-                    <div class="flex flex-col gap-2 lg:gap-4">
-
-                        <h1 class="text-4xl lg:text-6xl">Дом «Сохатка»</h1>
-                        <div class="text-lg italic">до 6 человек</div>
-
-                        <ul class="list-disc pl-5 space-y-2 text-lg">
-                            <li>Спальня на первом этаже с двухместной кроватью</li>
-                            <li>Спальня на втором этаже (второй свет) с двухместной кроватью</li>
-                            <li>Раскладной диван в гостиной</li>
-                            <li>Кухня: посуда (кружки, тарелки, кастрюли, сковорода, а также соль, перец, сахар, чай, подсолнечное масло), чайник, плита, холодильник, микроволновая печь</li>
-                            <li>Тёплый душ и санузел</li>
-                            <li>Камин в гостиной с панорамным остеклением</li>
-                            <li>Постельное бельё и полотенца предоставляются</li>
-                            <li>BBQ-зона рядом с домом: мангал и решётка для жарки (уголь и розжиг можно приобрести у нас)</li>
-                        </ul>
-                    </div>
-
-                    <div class="flex flex-col gap-4">
-                        <div class="mt-0 lg:mt-2 text-lg italic">
-                            Тариф на 4 человек: <br>
-                            Пн–чт <span>14 000 ₽/сутки</span><br>
-                            Пт–вс <span>16 000 ₽/сутки</span><br>
-                            Доп. гость <span>+1500 ₽</span><br>
-                        </div>
-
-                        <div class="mt-2">
-                            <a href="#header-book">
-                            <button 
-                                style="background-image: url('assets/images/btn-watch-dates.svg');"
-                                class="flex justify-center text-xl
-                                    text-secondary bg-no-repeat bg-center bg-contain
-                                items-center justify-center px-12 py-3 lg:px-20 lg:py-5 text-bg"> Смотреть свободные даты</button>                           
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </article>
-            </div>
-           
-
-            
-    </section>
-
-<section id="restaurant" class="w-full bg-primary py-10 lg:py-16 mt-16 px-4 sm:px-6 lg:px-30 rounded-2xl">
-    <!-- Ресторан -->
-            <div class="space-y-12 w-full ">
-            <!-- === Домик «Шале» === -->
-            <article data-house class="space-y-4 lg:space-y-8 lg:grid lg:grid-cols-2 gap-8 items-start rounded-3xl w-full">
-                <!-- Галерея -->
-                <div class="relative h-[30vh] sm:h-[50vh] lg:h-full">
-                    <div class="swiper house-gallery rounded-2xl overflow-hidden h-full">
-                        <div class="swiper-wrapper h-full">
-                            <div class="swiper-slide">
-
-                                <img src="assets/images/houses/kiprey-1.jpg" alt="Домик «Шале» — вид снаружи"
-                                    class="w-full h-full object-cover cursor-zoom-in" loading="lazy">
-          
-                            </div>
-                            <div class="swiper-slide">
-
-                                <img src="assets/images/houses/kiprey-2.jpg" alt="Домик «Шале» — гостиная"
-                                    class="w-full h-full object-cover cursor-zoom-in" loading="lazy">
-  
-                            </div>
-                            <div class="swiper-slide">
-
-                                <img src="assets/images/houses/kiprey-3.jpg" alt="Домик «Шале» — терраса"
-                                    class="w-full h-full object-cover cursor-zoom-in" loading="lazy">
-
-                            </div>
-                        </div>
-                        <div class="house-pagination swiper-pagination !bottom-3"></div>
-                    </div>
-
-                    <!-- Стрелки поверх фото -->
-                    <button class="house-prev group absolute left-3 top-1/2 -translate-y-1/2 z-10 grid place-items-center w-9 h-9 rounded-full bg-bg hover:opacity-100 opacity-90 backdrop-blur text-secondary">&#10094;</button>
-                    <button class="house-next group absolute right-3 top-1/2 -translate-y-1/2 z-10 grid place-items-center w-9 h-9 rounded-full bg-bg hover:opacity-100 opacity-90 backdrop-blur text-secondary">&#10095;</button>
-
-                </div>
-
-                <!-- Контент -->
-                <div class="flex flex-col justify-between gap-4 lg:gap-8 h-full text-bg">
-                    <div class="flex flex-col gap-2 lg:gap-4">
-
-                        <h1 class="text-4xl lg:text-6xl">Ресторан для мероприятий</h1>
-                        <div class="text-lg italic">2 человека</div>
-
-                        <ul class="list-disc pl-5 space-y-2 text-lg">
-                            <li>Большие панорамные окна с видом на лес</li>
-                            <li>Двуспальная кровать, постельное бельё, полотенца</li>
-                            <li>Душ, туалет, горячая вода</li>
-                            <li>Обогреватель</li>
-                            <li>Оборудованная кухня: посуда, плита, холодильник, чайник</li>
-                            <li>Открытая веранда с креслами</li>
-                            <li>Мангал, уличный стол</li>
-                            <li>Гамак и качель</li>
-                            <li>У веранды — собственная горячая купель (дополнительно)</li>
-                        </ul>
-                    </div>
-
-                    <div class="flex flex-col gap-4">
-                        <div class="mt-2 text-lg italic">от <span >4400 ₽</span></div>
-
-                        <div class="mt-2">
-                            <a href="#header-book">
-                            <button 
-                                style="background-image: url('assets/images/btn-big.svg');"
-                                class="flex justify-center text-xl
-                                    text-secondary bg-no-repeat bg-center bg-contain
-                                items-center justify-center px-12 py-3 lg:px-20 lg:py-5 text-primary"> Смотреть свободные даты</button>                           
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </article>
-            </div>
-    </section>
-    
-<section id="phone" class="w-full mt-16 px-4 sm:px-6 lg:px-30">
-    <div class="bg-primary flex flex-col justify-between items-center text-bg gap-4 rounded-2xl p-12 text-center">
-        <h1 class="text-6xl lg:text-7xl">ОСТАВЬТЕ ЗАЯВКУ</h1>
-        <p class="text-lg ">Свяжитесь с нами по номеру телефона или в соцсетях и мы ответим на все ваши вопросы</p>
-        <h1 class="text-6xl lg:text-7xl mt-2">+7 (999) 999-99-99</h1>
-        <div class="flex gap-6">
-            <a href="#">
-                <button>
-                    <img src="assets/images/tg.svg" class="w-12 h-12"/>
-                </button>
-            </a>
-            <a href="#">
-                <button>
-                    <img src="assets/images/wa.svg" class="w-12 h-12"/>
-                </button>
-            </a>
-        </div>
-    </div>
-</section>
-
-<section id="photo-collage" data-collage class="relative w-full mt-12 px-4 sm:px-6 lg:px-30 py-4">
+<section id="photo-collage" data-collage class="relative w-full mt-4 lg:mt-8 lg:px-30 py-4">
   <div id="collage-wrap" class="relative overflow-hidden">
     <!-- РЯД 1: слева большое, справа 2×2 -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
@@ -1092,38 +562,85 @@
 
 </section>
 
-
-<section id="map" class="w-full mt-12  px-4 sm:px-6 lg:px-30 pt-16 lg:pt-24">
-    <div class="flex bg-primary text-bg justify-between rounded-2xl p-12">
-        <div class="flex flex-col justify-between items-center text-center lg:items-start lg:text-left gap-4 max-w-full lg:max-w-1/3">
-            <h1 class="text-7xl lg:text-9xl">НАША ТЕРРИТОРИЯ</h1>
-
-            <div class="flex lg:hidden">
-                <img src="assets/images/map.svg"/>
-            </div>
-
-            <p class="text-lg ">3 домиков и большой ресторан для вашего отдыха, пирс для атмосферных праздников, а рядом лес и речка</p>
-            <div class="flex gap-2 mt-3">
-                            <img src="assets/images/point.svg"> <p class="text-lg lg:text-xl">г. Пермь, Русское Поле</p>
-            </div>
-            <div class="flex mt-4">
-                <a href="#header-book">
-                    <button
-                        class="flex items-center justify-center px-24 py-4 lg:px-28 lg:py-5 text-xl lg:text-2xl transition-colors duration-300
-                            text-secondary bg-no-repeat bg-center bg-contain"
-                        style="background-image: url('assets/images/btn-big.svg');"
-                    >
-                        Забронировать
-                    </button>
-                    </a>
+            <!-- ЛАЙТБОКС (нативный <dialog>) -->
+            <dialog id="lightbox"
+            class="max-w-full max-h-full p-0 m-0 w-full h-full bg-black/90 backdrop:backdrop-blur">
+            <div class="relative w-full h-full">
+                <!-- Холст для панорамирования -->
+                <div id="lightbox-stage"
+                    class="cursor-grab absolute inset-0 grid place-items-center overflow-hidden touch-pan-y">
+                <img id="lightbox-img" src="" alt=""
+                    class="max-w-[150vw] max-h-[150vh] h-[75vh] w-[75vw] object-contain select-none will-change-transform"
+                    draggable="false" />
                 </div>
-        </div>
 
-        <div class="hidden lg:flex w-full pl-8">
-            <img src="assets/images/map.svg" class="w-full h-full "/>
+                <!-- Верхняя панель -->
+                <button id="lightbox-close"
+                class="absolute top-4 right-4 px-4 py-2 rounded-full bg-white/90 hover:bg-white text-black text-sm shadow">
+                Закрыть ✕
+                </button>
+
+                <!-- Нижняя панель инструментов -->
+                <div class="absolute left-1/2 -translate-x-1/2 bottom-6 flex items-center gap-2
+                            rounded-full bg-white/90 backdrop-blur px-3 py-2 shadow">
+                <button id="zoom-out" class="px-3 py-1 rounded-full hover:bg-white text-black">−</button>
+                <div id="zoom-level" class="min-w-14 text-center text-sm text-black">100%</div>
+                <button id="zoom-in" class="px-3 py-1 rounded-full hover:bg-white text-black">+</button>
+                <span class="mx-1 h-5 w-px bg-black/20"></span>
+                <button id="fit-screen" class="px-3 py-1 rounded-full hover:bg-white text-black">По экрану</button>
+                <button id="zoom-100" class="px-3 py-1 rounded-full hover:bg-white text-black">100%</button>
+                </div>
+            </div>
+
+            <!-- ЛЕВАЯ/ПРАВАЯ СТРЕЛКИ ВНУТРИ ДИАЛОГА -->
+                <button id="lightbox-prev"
+                class="absolute left-4 top-1/2 -translate-y-1/2 z-10 grid place-items-center w-12 h-12 rounded-full
+                        bg-black/60 hover:bg-black/80 text-white select-none"
+                aria-label="Предыдущее фото">&#10094;</button>
+
+                <button id="lightbox-next"
+                class="absolute right-4 top-1/2 -translate-y-1/2 z-10 grid place-items-center w-12 h-12 rounded-full
+                        bg-black/60 hover:bg-black/80 text-white select-none"
+                aria-label="Следующее фото">&#10095;</button>
+            </dialog>
+    
+    <!-- Слой с декорациями -->
+        <div  data-scroll-scope class="pointer-events-none absolute inset-0 z-10 overflow-visible lg:block hidden">
+            <!-- 1) cloud1 справа, летит направо -->
+            <div class="absolute inset-0 overflow-hidden">
+            <img
+                src="assets/images/cloud3.svg" alt=""
+                class="absolute top-[200px] right-[150px] -scale-x-100"
+                data-parallax
+                data-speed-x="-0.22" data-speed-y="0.1" data-scale="0" />
+            </div>
+
+            <!-- 4) cloud3 слева снизу, летит вправо-вниз и чуть уменьшается -->
+            <img
+                src="assets/images/cloud1.svg" alt=""
+                class="absolute bottom-[50px] -left-[500px]"
+                data-parallax
+                data-speed-x="0.3" data-speed-y="0" data-scale="0" />
         </div>
+    </section>
+
+        
+    <section id="separator" class="lg:py-4">
+  <div class="mx-auto w-full overflow-hidden">
+    <div id="sep-track"
+         class="will-change-transform"
+         data-parallax
+         data-from-x="-70%"  
+         data-to-x="0%"      
+         data-from-scale="1"   
+         data-to-scale="1">
+      <img
+        src="assets/images/separator.png"
+        alt=""
+        class="pointer-events-none select-none block max-w-none h-[15vh] lg:h-full" />
     </div>
-</section>
+  </div>
+    </section>
 
 <section id="events" class="relative flex flex-col items-center w-full px-4 sm:px-6 lg:px-30 pt-16 lg:pt-24">
         <div class="relative flex justify-center text-center">
@@ -1376,10 +893,10 @@
                                 <div>
                                     <!-- Цена: всё в одном блоке -->
                                     <div class="mt-4 flex items-center justify-between">
-                                        <span class="sr-only">Цена</span>
+                                        <!-- <span class="sr-only">Цена</span>
                                         <div class="ml-auto text-lg italic">
                                             Бесплатно
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
                             </div>
@@ -1424,10 +941,10 @@
                                 <div>
                                     <!-- Цена: всё в одном блоке -->
                                     <div class="mt-4 flex items-center justify-between">
-                                        <span class="sr-only">Цена</span>
+                                        <!-- <span class="sr-only">Цена</span>
                                         <div class="ml-auto text-lg italic">
                                             Бесплатно
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
                             </div>
@@ -1436,6 +953,69 @@
                 </article>
 
 
+                <article class="swiper-slide relative px-10 md:px-0 md:pb-0 pb-7 h-full " data-service>                        
+                    <div class="rounded-lg border border-secondary h-full">
+                        <!-- decor -->
+                        <img src="assets/images/leaf3.svg" alt=""
+                            data-decor
+                            class="pointer-events-none select-none hidden lg:block absolute -right-16 bottom-1/4 w-36 z-[49]">
+                    
+                        <!-- content -->
+                        <div class="p-3 md:p-6 h-full flex flex-col">
+                            <!-- ГАЛЕРЕЯ УСЛУГИ -->
+                            <div class="relative">
+                            <div class="swiper service-gallery rounded-md overflow-hidden">
+                                <div class="swiper-wrapper">
+                                <!-- слайды: добавь свои пути -->
+                                <div class="swiper-slide">
+                                        <div class="relative w-full [aspect-ratio:4/3]">
+                                        <img src="assets/images/events/kacheli-1.jpg" alt="Качели — вид 1"
+                                            class="cursor-zoom-in absolute inset-0 w-full h-full object-cover" loading="lazy">
+                                        </div>
+                                    </div>
+                                <div class="swiper-slide">
+                                        <div class="relative w-full [aspect-ratio:4/3]">
+                                        <img src="assets/images/events/kacheli-2.jpg" alt="Качели — вид 2"
+                                            class="cursor-zoom-in absolute inset-0 w-full h-full object-cover" loading="lazy">
+                                        </div>
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <div class="relative w-full [aspect-ratio:4/3]">
+                                        <img src="assets/images/events/kacheli-3.jpg" alt="Качели — вид 3"
+                                            class="cursor-zoom-in absolute inset-0 w-full h-full object-cover" loading="lazy">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="md:block hidden service-pagination swiper-pagination !bottom-3"></div>
+                            </div>
+
+                            <!-- стрелки -->
+                            <button class="text-xs service-prev absolute left-3 top-1/2 -translate-y-1/2 z-10 grid place-items-center  w-8 h-8 rounded-full bg-black/40 hover:bg-black/60 text-bg">&#10094;</button>
+                            <button class="text-xs service-next absolute right-3 top-1/2 -translate-y-1/2 z-10 grid place-items-center  w-8 h-8 rounded-full bg-black/40 hover:bg-black/60 text-bg">&#10095;</button>
+                            </div>
+
+                            <!-- Текст -->
+                            <div class="flex flex-col h-full justify-between">
+                                <div>
+                                    <h1 class="text-5xl mb-2 mt-4 text-primary">Качельки</h1>
+                                    <p class="text-lg leading-snug max-w-prose">
+                                    Вайбовые качельки дают возможность уединиться и войти в унисон с природой… Или устроить атмосферную беседу параллельно любуясь шикарными видами!
+                                    </p>
+                                </div>
+
+                                <div>
+                                    <!-- Цена: всё в одном блоке -->
+                                    <div class="mt-4 flex items-center justify-between">
+                                        <!-- <span class="sr-only">Цена</span>
+                                        <div class="ml-auto text-lg italic">
+                                            Бесплатно
+                                        </div> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                </article>
             
             
                 
@@ -1483,6 +1063,556 @@
                 data-parallax
                 data-speed-x="-0.22" data-speed-y="0.1" data-scale="0" />
         </div>
+</section>
+
+    <!-- Houses Section -->
+    <section id="houses" class="relative flex flex-col items-center w-full px-4 sm:px-6 lg:px-30 pt-16 lg:pt-24">
+        <div class="relative flex justify-center">
+            <h1 class="text-7xl lg:text-8xl mb-8 lg:mb-12 text-center">
+                ДОМИКИ ДЛЯ РАЗМЕЩЕНИЯ
+            </h1>
+        </div>
+        
+        <div class="flex max-w-135 text-center text-xl">
+            3 просторных домика с панорамными окнами и большой ресторан для мероприятий
+        </div>
+
+        <!-- Карточка домика -->
+            <div class="mt-12 lg:mt-16 space-y-12 w-full ">
+            <!-- === Домик «Шале» === -->
+            <article data-house class="space-y-4 lg:space-y-8 lg:grid lg:grid-cols-2 gap-8 items-start rounded-3xl w-full">
+                <!-- Галерея -->
+                <div class="relative h-[30vh] sm:h-[50vh] lg:h-full">
+                    <div class="swiper house-gallery rounded-2xl overflow-hidden h-full">
+                        <div class="swiper-wrapper h-full">
+                            <div class="swiper-slide">
+
+                                <img src="assets/images/houses/kiprey-1.jpg" alt="Домик «Кипрей» 1"
+                                    class="w-full h-full object-cover cursor-zoom-in" loading="lazy">
+          
+                            </div>
+                            <div class="swiper-slide">
+
+                                <img src="assets/images/houses/kiprey-2.jpg" alt="Домик ««Кипрей» 2"
+                                    class="w-full h-full object-cover cursor-zoom-in" loading="lazy">
+  
+                            </div>
+                            <div class="swiper-slide">
+
+                                <img src="assets/images/houses/kiprey-3.jpg" alt="Домик ««Кипрей» 3"
+                                    class="w-full h-full object-cover cursor-zoom-in" loading="lazy">
+
+                            </div>
+                            <div class="swiper-slide">
+
+                                <img src="assets/images/houses/kiprey-4.jpg" alt="Домик ««Кипрей» 4"
+                                    class="w-full h-full object-cover cursor-zoom-in" loading="lazy">
+
+                            </div>
+                            <div class="swiper-slide">
+
+                                <img src="assets/images/houses/kiprey-5.jpg" alt="Домик ««Кипрей» 5"
+                                    class="w-full h-full object-cover cursor-zoom-in" loading="lazy">
+
+                            </div>
+                            <div class="swiper-slide">
+
+                                <img src="assets/images/houses/kiprey-6.jpg" alt="Домик ««Кипрей» 6"
+                                    class="w-full h-full object-cover cursor-zoom-in" loading="lazy">
+
+                            </div>
+                            <div class="swiper-slide">
+
+                                <img src="assets/images/houses/kiprey-7.jpg" alt="Домик ««Кипрей» 7"
+                                    class="w-full h-full object-cover cursor-zoom-in" loading="lazy">
+
+                            </div>
+                            <div class="swiper-slide">
+
+                                <img src="assets/images/houses/kiprey-8.jpg" alt="Домик ««Кипрей» 8"
+                                    class="w-full h-full object-cover cursor-zoom-in" loading="lazy">
+
+                            </div>
+                            <div class="swiper-slide">
+
+                                <img src="assets/images/houses/kiprey-9.jpg" alt="Домик ««Кипрей» 9"
+                                    class="w-full h-full object-cover cursor-zoom-in" loading="lazy">
+
+                            </div>
+                            <div class="swiper-slide">
+
+                                <img src="assets/images/houses/kiprey-10.jpg" alt="Домик ««Кипрей» 10"
+                                    class="w-full h-full object-cover cursor-zoom-in" loading="lazy">
+
+                            </div>
+                            <div class="swiper-slide">
+
+                                <img src="assets/images/houses/kiprey-11.jpg" alt="Домик «Кипрей» 11"
+                                    class="w-full h-full object-cover cursor-zoom-in" loading="lazy">
+          
+                            </div>
+                            <div class="swiper-slide">
+
+                                <img src="assets/images/houses/kiprey-12.jpg" alt="Домик ««Кипрей» 12"
+                                    class="w-full h-full object-cover cursor-zoom-in" loading="lazy">
+  
+                            </div>
+                            <div class="swiper-slide">
+
+                                <img src="assets/images/houses/kiprey-13.jpg" alt="Домик ««Кипрей» 13"
+                                    class="w-full h-full object-cover cursor-zoom-in" loading="lazy">
+
+                            </div>
+                            <div class="swiper-slide">
+
+                                <img src="assets/images/houses/kiprey-14.jpg" alt="Домик ««Кипрей» 14"
+                                    class="w-full h-full object-cover cursor-zoom-in" loading="lazy">
+
+                            </div>
+                            <div class="swiper-slide">
+
+                                <img src="assets/images/houses/kiprey-15.jpg" alt="Домик ««Кипрей» 15"
+                                    class="w-full h-full object-cover cursor-zoom-in" loading="lazy">
+
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="assets/images/houses/kiprey-16.jpg" alt="Домик ««Кипрей» 16"
+                                    class="w-full h-full object-cover cursor-zoom-in" loading="lazy">
+                            </div>
+                        </div>
+                        <div class="house-pagination swiper-pagination !bottom-3"></div>
+                    </div>
+
+                    <!-- Стрелки поверх фото -->
+                    <button class="house-prev group absolute left-3 top-1/2 -translate-y-1/2 z-10 grid place-items-center w-9 h-9 rounded-full bg-bg hover:opacity-100 opacity-90 backdrop-blur text-secondary">&#10094;</button>
+                    <button class="house-next group absolute right-3 top-1/2 -translate-y-1/2 z-10 grid place-items-center w-9 h-9 rounded-full bg-bg hover:opacity-100 opacity-90 backdrop-blur text-secondary">&#10095;</button>
+
+                </div>
+
+                <!-- Контент -->
+                <div class="flex flex-col justify-between gap-4 lg:gap-8 h-full">
+                    <div class="flex flex-col gap-2 lg:gap-4">
+
+                        <h1 class="text-4xl lg:text-6xl">Дом «Кипрей»</h1>
+                        <div class="text-lg italic">до 6 человек</div>
+
+                        <ul class="list-disc pl-5 space-y-2 text-lg">
+                            <li>Дом на холмистом берегу реки Сылва с панорамными видами</li>
+                            <li>2 спальни с двухместными кроватями</li>
+                            <li>Раскладной диван в гостиной</li>
+                            <li>2 санузла (на каждом этаже)</li>
+                            <li>Кухня с полным оснащением: посуда, чайник, плита, холодильник, микроволновая печь</li>
+                            <li>Гостиная с панорамными окнами</li>
+                        </ul>
+                    </div>
+
+                    <div class="flex flex-col gap-4">
+                        <div class="mt-0 lg:mt-2 text-lg italic">
+                            Тариф на 4 человек: <br>
+                            Пн–чт <span>16 000 ₽/сутки</span><br>
+                            Пт–вс <span>18 000 ₽/сутки</span><br>
+                            Доп. гость <span>+1500 ₽</span><br>
+                        </div>
+
+                        <div class="mt-2">
+                            <a href="#header-book">
+                            <button 
+                                style="background-image: url('assets/images/btn-watch-dates.svg');"
+                                class="flex justify-center text-xl
+                                    text-secondary bg-no-repeat bg-center bg-contain
+                                items-center justify-center px-12 py-3 lg:px-20 lg:py-5 text-bg"> Смотреть свободные даты</button>                           
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            </div>
+
+            <!-- Карточка домика -->
+            <div class="mt-12 lg:mt-16 space-y-12 w-full ">
+            <!-- === Домик «Шале» === -->
+            <article data-house class="space-y-4 lg:space-y-8 lg:grid lg:grid-cols-2 gap-8 items-start rounded-3xl w-full">
+                <!-- Галерея -->
+                <div class="relative h-[30vh] sm:h-[50vh] lg:h-full">
+                    <div class="swiper house-gallery rounded-2xl overflow-hidden h-full">
+                        <div class="swiper-wrapper h-full">
+                            <div class="swiper-slide">
+
+                                <img src="assets/images/houses/sudak-1.jpg" alt="Домик «Судак» 1"
+                                    class="w-full h-full object-cover cursor-zoom-in" loading="lazy">
+          
+                            </div>
+                            <div class="swiper-slide">
+
+                                <img src="assets/images/houses/sudak-2.jpg" alt="Домик «Судак» 2"
+                                    class="w-full h-full object-cover cursor-zoom-in" loading="lazy">
+  
+                            </div>
+                            <div class="swiper-slide">
+
+                                <img src="assets/images/houses/sudak-3.jpg" alt="Домик «Судак» 3"
+                                    class="w-full h-full object-cover cursor-zoom-in" loading="lazy">
+
+                            </div>
+                            <div class="swiper-slide">
+
+                                <img src="assets/images/houses/sudak-4.jpg" alt="Домик «Судак» 4"
+                                    class="w-full h-full object-cover cursor-zoom-in" loading="lazy">
+          
+                            </div>
+                            <div class="swiper-slide">
+
+                                <img src="assets/images/houses/sudak-5.jpg" alt="Домик «Судак» 5"
+                                    class="w-full h-full object-cover cursor-zoom-in" loading="lazy">
+  
+                            </div>
+                            <div class="swiper-slide">
+
+                                <img src="assets/images/houses/sudak-6.jpg" alt="Домик «Судак» 6"
+                                    class="w-full h-full object-cover cursor-zoom-in" loading="lazy">
+
+                            </div>
+                        </div>
+                        <div class="house-pagination swiper-pagination !bottom-3"></div>
+                    </div>
+
+                    <!-- Стрелки поверх фото -->
+                    <button class="house-prev group absolute left-3 top-1/2 -translate-y-1/2 z-10 grid place-items-center w-9 h-9 rounded-full bg-bg hover:opacity-100 opacity-90 backdrop-blur text-secondary">&#10094;</button>
+                    <button class="house-next group absolute right-3 top-1/2 -translate-y-1/2 z-10 grid place-items-center w-9 h-9 rounded-full bg-bg hover:opacity-100 opacity-90 backdrop-blur text-secondary">&#10095;</button>
+
+                </div>
+
+                <!-- Контент -->
+                <div class="flex flex-col justify-between gap-4 lg:gap-8 h-full">
+                    <div class="flex flex-col gap-2 lg:gap-4">
+
+                        <h1 class="text-4xl lg:text-6xl">Дом «Судак»</h1>
+                        <div class="text-lg italic">до 6 человек</div>
+
+                        <ul class="list-disc pl-5 space-y-2 text-lg">
+                            <li>Спальня на первом этаже с двухместной кроватью</li>
+                            <li>Спальня на втором этаже (второй свет) с двухместной кроватью</li>
+                            <li>Раскладной диван в гостиной</li>
+                            <li>Кухня: посуда, чайник, плита, холодильник, микроволновая печь</li>
+                            <li>Тёплый душ и санузел</li>
+                            <li>Камин в гостиной с панорамным остеклением</li>
+                            <li>Постельное бельё и полотенца предоставляются</li>
+                        </ul>
+                    </div>
+
+                    <div class="flex flex-col gap-4">
+                        <div class="mt-0 lg:mt-2 text-lg italic">
+                            Тариф на 4 человек: <br>
+                            Пн–чт <span>14 000 ₽/сутки</span><br>
+                            Пт–вс <span>16 000 ₽/сутки</span><br>
+                            Доп. гость <span>+1500 ₽</span><br>
+                        </div>
+
+                        <div class="mt-2">
+                            <a href="#header-book">
+                            <button 
+                                style="background-image: url('assets/images/btn-watch-dates.svg');"
+                                class="flex justify-center text-xl
+                                    text-secondary bg-no-repeat bg-center bg-contain
+                                items-center justify-center px-12 py-3 lg:px-20 lg:py-5 text-bg"> Смотреть свободные даты</button>                           
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            </div>
+
+            <!-- Карточка домика -->
+            <div class="mt-12 lg:mt-16 space-y-12 w-full ">
+            <!-- === Домик «Шале» === -->
+            <article data-house class="space-y-4 lg:space-y-8 lg:grid lg:grid-cols-2 gap-8 items-start rounded-3xl w-full">
+                <!-- Галерея -->
+                <div class="relative h-[30vh] sm:h-[50vh] lg:h-full">
+                    <div class="swiper house-gallery rounded-2xl overflow-hidden h-full">
+                        <div class="swiper-wrapper h-full">
+                            <div class="swiper-slide">
+
+                                <img src="assets/images/houses/sohatka-1.jpg" alt="Домик «Сохатка» 1"
+                                    class="w-full h-full object-cover cursor-zoom-in" loading="lazy">
+          
+                            </div>
+                            <div class="swiper-slide">
+
+                                <img src="assets/images/houses/sohatka-2.jpg" alt="Домик «Сохатка» 2"
+                                    class="w-full h-full object-cover cursor-zoom-in" loading="lazy">
+  
+                            </div>
+                            <div class="swiper-slide">
+
+                                <img src="assets/images/houses/sohatka-3.jpg" alt="Домик «Сохатка» 3"
+                                    class="w-full h-full object-cover cursor-zoom-in" loading="lazy">
+
+                            </div>
+                            <div class="swiper-slide">
+
+                                <img src="assets/images/houses/sohatka-4.jpg" alt="Домик «Сохатка» 4"
+                                    class="w-full h-full object-cover cursor-zoom-in" loading="lazy">
+  
+                            </div>
+                            <div class="swiper-slide">
+
+                                <img src="assets/images/houses/sohatka-5.jpg" alt="Домик «Сохатка» 5"
+                                    class="w-full h-full object-cover cursor-zoom-in" loading="lazy">
+
+                            </div>
+                        </div>
+                        <div class="house-pagination swiper-pagination !bottom-3"></div>
+                    </div>
+
+                    <!-- Стрелки поверх фото -->
+                    <button class="house-prev group absolute left-3 top-1/2 -translate-y-1/2 z-10 grid place-items-center w-9 h-9 rounded-full bg-bg hover:opacity-100 opacity-90 backdrop-blur text-secondary">&#10094;</button>
+                    <button class="house-next group absolute right-3 top-1/2 -translate-y-1/2 z-10 grid place-items-center w-9 h-9 rounded-full bg-bg hover:opacity-100 opacity-90 backdrop-blur text-secondary">&#10095;</button>
+
+                </div>
+
+                <!-- Контент -->
+                <div class="flex flex-col justify-between gap-4 lg:gap-8 h-full">
+                    <div class="flex flex-col gap-2 lg:gap-4">
+
+                        <h1 class="text-4xl lg:text-6xl">Дом «Сохатка»</h1>
+                        <div class="text-lg italic">до 6 человек</div>
+
+                        <ul class="list-disc pl-5 space-y-2 text-lg">
+                            <li>Спальня на первом этаже с двухместной кроватью</li>
+                            <li>Спальня на втором этаже (второй свет) с двухместной кроватью</li>
+                            <li>Раскладной диван в гостиной</li>
+                            <li>Кухня: посуда (кружки, тарелки, кастрюли, сковорода, а также соль, перец, сахар, чай, подсолнечное масло), чайник, плита, холодильник, микроволновая печь</li>
+                            <li>Тёплый душ и санузел</li>
+                            <li>Камин в гостиной с панорамным остеклением</li>
+                            <li>Постельное бельё и полотенца предоставляются</li>
+                            <li>BBQ-зона рядом с домом: мангал и решётка для жарки (уголь и розжиг можно приобрести у нас)</li>
+                        </ul>
+                    </div>
+
+                    <div class="flex flex-col gap-4">
+                        <div class="mt-0 lg:mt-2 text-lg italic">
+                            Тариф на 4 человек: <br>
+                            Пн–чт <span>14 000 ₽/сутки</span><br>
+                            Пт–вс <span>16 000 ₽/сутки</span><br>
+                            Доп. гость <span>+1500 ₽</span><br>
+                        </div>
+
+                        <div class="mt-2">
+                            <a href="#header-book">
+                            <button 
+                                style="background-image: url('assets/images/btn-watch-dates.svg');"
+                                class="flex justify-center text-xl
+                                    text-secondary bg-no-repeat bg-center bg-contain
+                                items-center justify-center px-12 py-3 lg:px-20 lg:py-5 text-bg"> Смотреть свободные даты</button>                           
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            </div>
+           
+
+            
+    </section>
+
+<section id="restaurant" class="w-full bg-primary py-10 lg:py-16 mt-16 px-4 sm:px-6 lg:px-30 rounded-2xl">
+    <!-- Шале -->
+            <div class="space-y-12 w-full ">
+            <!-- === Шале === -->
+            <article data-house class="space-y-4 lg:space-y-8 lg:grid lg:grid-cols-2 gap-8 items-start rounded-3xl w-full">
+                <!-- Галерея -->
+                <div class="relative h-[30vh] sm:h-[50vh] lg:h-full">
+                    <div class="swiper house-gallery rounded-2xl overflow-hidden h-full">
+                        <div class="swiper-wrapper h-full">
+                            <div class="swiper-slide">
+
+                                <img src="assets/images/houses/kiprey-1.jpg" alt="Шале — вид 1"
+                                    class="w-full h-full object-cover cursor-zoom-in" loading="lazy">
+          
+                            </div>
+                            <div class="swiper-slide">
+
+                                <img src="assets/images/houses/kiprey-2.jpg" alt="Шале — вид 2"
+                                    class="w-full h-full object-cover cursor-zoom-in" loading="lazy">
+  
+                            </div>
+                            <div class="swiper-slide">
+
+                                <img src="assets/images/houses/kiprey-3.jpg" alt="Шале — вид 3"
+                                    class="w-full h-full object-cover cursor-zoom-in" loading="lazy">
+
+                            </div>
+                        </div>
+                        <div class="house-pagination swiper-pagination !bottom-3"></div>
+                    </div>
+
+                    <!-- Стрелки поверх фото -->
+                    <button class="house-prev group absolute left-3 top-1/2 -translate-y-1/2 z-10 grid place-items-center w-9 h-9 rounded-full bg-bg hover:opacity-100 opacity-90 backdrop-blur text-secondary">&#10094;</button>
+                    <button class="house-next group absolute right-3 top-1/2 -translate-y-1/2 z-10 grid place-items-center w-9 h-9 rounded-full bg-bg hover:opacity-100 opacity-90 backdrop-blur text-secondary">&#10095;</button>
+
+                </div>
+
+                <!-- Контент -->
+                <div class="flex flex-col justify-between gap-4 lg:gap-8 h-full text-bg">
+                    <div class="flex flex-col gap-2 lg:gap-4">
+
+                        <h1 class="text-4xl lg:text-6xl">Шале</h1>
+                        <!-- <div class="text-lg italic">2 человека</div> -->
+
+                        <ul class="list-disc pl-5 space-y-2 text-lg">
+                            <li>Шале Sylva River – сердце парка, где проходят громкие свадьбы, веселые корпоративы, яркие мероприятия, творческие встречи и многое другое</li>
+                            <li>Места хватит на всех! Пятьсот квадратных метров двух этажного помещения с балконами, двумя туалетами, отдельным помещением под кетеринг-кухню не даст тесниться</li>
+                            <li>Видовая терраса на реку, панорамные окна и большой камин создают неповторимый шарм!</li>
+                        </ul>
+                    </div>
+
+                    <div class="flex flex-col gap-4">
+                        <div class="mt-2 text-lg italic">от <span >4400 ₽</span></div>
+
+                        <div class="mt-2">
+                            <a href="#header-book">
+                            <button 
+                                style="background-image: url('assets/images/btn-big.svg');"
+                                class="flex justify-center text-xl
+                                    text-secondary bg-no-repeat bg-center bg-contain
+                                items-center justify-center px-12 py-3 lg:px-20 lg:py-5 text-primary"> Смотреть свободные даты</button>                           
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            </div>
+    </section>
+    
+<section id="phone" class="w-full mt-16 px-4 sm:px-6 lg:px-30">
+    <div class="bg-primary flex flex-col justify-between items-center text-bg gap-4 rounded-2xl p-12 text-center">
+        <h1 class="text-6xl lg:text-7xl">ОСТАВЬТЕ ЗАЯВКУ</h1>
+        <p class="text-lg ">Свяжитесь с нами по номеру телефона или в соцсетях и мы ответим на все ваши вопросы</p>
+        <h1 class="text-6xl lg:text-7xl mt-2">+7 (999) 999-99-99</h1>
+        <div class="flex gap-6">
+            <a href="#">
+                <button>
+                    <img src="assets/images/tg.svg" class="w-12 h-12"/>
+                </button>
+            </a>
+            <a href="#">
+                <button>
+                    <img src="assets/images/wa.svg" class="w-12 h-12"/>
+                </button>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- <section id="photo-collage" data-collage class="relative w-full mt-12 px-4 sm:px-6 lg:px-30 py-4">
+  <div id="collage-wrap" class="relative overflow-hidden">
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
+
+      <a href="#" class="block rounded-2xl overflow-hidden bg-black/5" data-collage-img>
+        <div class="[aspect-ratio:1/1] relative">
+          <img src="assets/images/collage/1.png" alt="" class="absolute inset-0 w-full h-full object-cover">
+        </div>
+      </a>
+
+      <div class="grid grid-cols-2 grid-rows-2 gap-4">
+        <a href="#" class="block rounded-2xl overflow-hidden bg-black/5" data-collage-img>
+          <div class="[aspect-ratio:1/1] relative"><img src="assets/images/collage/2.png" alt="" class="absolute inset-0 w-full h-full object-cover"></div>
+        </a>
+        <a href="#" class="block rounded-2xl overflow-hidden bg-black/5" data-collage-img>
+          <div class="[aspect-ratio:1/1] relative"><img src="assets/images/collage/3.png" alt="" class="absolute inset-0 w-full h-full object-cover"></div>
+        </a>
+        <a href="#" class="block rounded-2xl overflow-hidden bg-black/5" data-collage-img>
+          <div class="[aspect-ratio:1/1] relative"><img src="assets/images/collage/2.png" alt="" class="absolute inset-0 w-full h-full object-cover"></div>
+        </a>
+        <a href="#" class="block rounded-2xl overflow-hidden bg-black/5" data-collage-img>
+          <div class="[aspect-ratio:1/1] relative"><img src="assets/images/collage/1.png" alt="" class="absolute inset-0 w-full h-full object-cover"></div>
+        </a>
+      </div>
+    </div>
+
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
+
+      <div class="grid grid-cols-2 grid-rows-2 gap-4 order-2 lg:order-1">
+        <a href="#" class="block rounded-2xl overflow-hidden bg-black/5" data-collage-img>
+          <div class="[aspect-ratio:1/1] relative"><img src="assets/images/collage/2.png" alt="" class="absolute inset-0 w-full h-full object-cover"></div>
+        </a>
+        <a href="#" class="block rounded-2xl overflow-hidden bg-black/5" data-collage-img>
+          <div class="[aspect-ratio:1/1] relative"><img src="assets/images/collage/3.png" alt="" class="absolute inset-0 w-full h-full object-cover"></div>
+        </a>
+        <a href="#" class="block rounded-2xl overflow-hidden bg-black/5" data-collage-img>
+          <div class="[aspect-ratio:1/1] relative"><img src="assets/images/collage/1.png" alt="" class="absolute inset-0 w-full h-full object-cover"></div>
+        </a>
+        <a href="#" class="block rounded-2xl overflow-hidden bg-black/5" data-collage-img>
+          <div class="[aspect-ratio:1/1] relative"><img src="assets/images/collage/2.png" alt="" class="absolute inset-0 w-full h-full object-cover"></div>
+        </a>
+      </div>
+
+      <a href="#" class="block rounded-2xl overflow-hidden order-1 lg:order-2 bg-black/5" data-collage-img>
+        <div class="[aspect-ratio:1/1] relative">
+          <img src="assets/images/collage/3.png" alt="" class="absolute inset-0 w-full h-full object-cover">
+        </div>
+      </a>
+    </div>
+
+
+    <div id="collage-fade" class="pointer-events-none absolute inset-x-0 bottom-0 h-1/4
+         bg-gradient-to-b from-transparent to-[rgb(var(--color-bg))]"></div>
+  </div>
+
+
+
+
+<div class="collage-cta absolute inset-x-0 -bottom-14 z-10 flex justify-center gap-3">
+  <button id="collage-more"
+          class="cta-collage relative items-center justify-center px-12 py-5 font-medium
+                 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/60
+                 transition-[color] duration-300 hover:text-[rgb(var(--color-bg))] text-[rgb(var(--color-primary))]">
+    <span class="relative z-10 transition-colors duration-300">Ещё фото</span>
+  </button>
+
+  <button id="collage-less"
+          class="cta-collage cta-collage--dark relative items-center justify-center px-12 py-5 font-medium
+                 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/60
+                 transition-[color] duration-300 hover:text-[rgb(var(--color-bg))] text-[rgb(var(--color-primary))] hidden">
+    <span class="relative z-10 transition-colors duration-300">Свернуть</span>
+  </button>
+</div>
+
+</section> -->
+
+
+<section id="map" class="w-full  px-4 sm:px-6 lg:px-30 pt-16 lg:pt-24">
+    <div class="flex bg-primary text-bg justify-between rounded-2xl p-12">
+        <div class="flex flex-col justify-between items-center text-center lg:items-start lg:text-left gap-4 max-w-full lg:max-w-1/3">
+            <h1 class="text-7xl lg:text-9xl">НАША ТЕРРИТОРИЯ</h1>
+
+            <div class="flex lg:hidden">
+                <img src="assets/images/map.svg"/>
+            </div>
+
+            <p class="text-lg ">3 домиков и большой ресторан для вашего отдыха, пирс для атмосферных праздников, а рядом лес и речка</p>
+            <div class="flex gap-2 mt-3">
+                            <img src="assets/images/point.svg"> <p class="text-lg lg:text-xl">г. Пермь, Русское Поле</p>
+            </div>
+            <div class="flex mt-4">
+                <a href="#header-book">
+                    <button
+                        class="flex items-center justify-center px-24 py-4 lg:px-28 lg:py-5 text-xl lg:text-2xl transition-colors duration-300
+                            text-secondary bg-no-repeat bg-center bg-contain"
+                        style="background-image: url('assets/images/btn-big.svg');"
+                    >
+                        Забронировать
+                    </button>
+                    </a>
+                </div>
+        </div>
+
+        <div class="hidden lg:flex w-full pl-8">
+            <img src="assets/images/map.svg" class="w-full h-full "/>
+        </div>
+    </div>
 </section>
 
 <section id="header-book" class="mt-16 lg:mt-32">
@@ -1564,7 +1694,7 @@
 <!-- PRAWAЯ КОЛОНКА -->
 <div class="w-full lg:w-1/2 flex justify-center lg:justify-end">
   <!-- Контейнер домика -->
-  <div class="relative w-[min(92vw,510px)] aspect-[5/6] house">
+  <div class="relative w-[min(92vw,510px)] aspect-[5/6]">
 
     <!-- 1) Тень (под всем) -->
     <img src="assets/images/house-shadow.svg" alt="" class="absolute -right-4 -bottom-4 w-full h-full object-contain pointer-events-none select-none z-0">
@@ -1589,8 +1719,8 @@
 </div>
         </div>
 
-        <div  data-scroll-scope class="pointer-events-none absolute inset-0 overflow-visible lg:block hidden z-[49]">
-            <!-- 1) cloud1 справа, летит направо -->
+        <div  data-scroll-scope class="pointer-events-none absolute inset-0 overflow-visible lg:block hidden z-0">
+
             <img
                 src="assets/images/steps.svg" alt=""
                 class="absolute top-1/2 left-1/4 w-1/2"
